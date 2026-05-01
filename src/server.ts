@@ -1,4 +1,6 @@
 import { appendLead, type Lead } from "./sheets";
+import { sendConfirmation, sendOwnerAlert } from "./email";
+import { sendWhatsAppAlert } from "./whatsapp";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");
@@ -57,29 +59,44 @@ const server = Bun.serve({
 
       const name  = body.name?.trim();
       const phone = body.phone?.trim();
+      const email = body.email?.trim();
 
-      if (!name || !phone) {
-        return json({ ok: false, error: "name and phone are required" }, 400);
+      if (!name || !phone || !email) {
+        return json({ ok: false, error: "name, phone, and email are required" }, 400);
       }
 
       const lead: Lead = {
         name,
+        email,
         phone,
-        budget:    body.budget    || "—",
-        timeline:  body.timeline  || "—",
+        city:      body.city?.trim()     || "—",
+        zip:       body.zip?.trim()      || "—",
+        budget:    body.budget           || "—",
+        timeline:  body.timeline         || "—",
         timestamp: new Date().toISOString(),
         source:    req.headers.get("referer") || "direct",
       };
 
       try {
         await appendLead(lead);
-        return json({ ok: true });
       } catch (err) {
         console.error("Sheet error:", err);
-        // Still return 200 so the user sees the thank-you — the lead is logged to console
         console.log("Lead (fallback):", lead);
-        return json({ ok: true });
       }
+
+      // Fire all notifications in parallel — never block the user response
+      Promise.allSettled([
+        sendConfirmation(lead),
+        sendOwnerAlert(lead),
+        sendWhatsAppAlert(lead),
+      ]).then(results => {
+        results.forEach((r, i) => {
+          const label = ["confirmation email", "owner alert", "whatsapp"][i];
+          if (r.status === "rejected") console.error(`${label} failed:`, r.reason);
+        });
+      });
+
+      return json({ ok: true });
     }
 
     return new Response("Not Found", { status: 404 });

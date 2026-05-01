@@ -6,6 +6,7 @@
     "start": "bun src/server.ts"
   },
   "dependencies": {
-    "googleapis": "^144.0.0"
+    "googleapis": "^144.0.0",
+    "resend": "^4.5.1"
   }
 }

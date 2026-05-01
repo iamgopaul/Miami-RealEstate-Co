@@ -188,6 +188,15 @@
 
     .field { margin-bottom: 13px; }
 
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .field-row .field { margin-bottom: 0; }
+
     .field label {
       display: block;
       font-size: 11px;
@@ -622,6 +631,25 @@
             </div>
 
             <div class="field">
+              <label for="email">Email Address <span style="color:#e55a26">*</span></label>
+              <input type="email" id="email" name="email"
+                     placeholder="jane@example.com" required autocomplete="email">
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city"
+                       placeholder="Miami" autocomplete="address-level2">
+              </div>
+              <div class="field">
+                <label for="zip">Zip Code</label>
+                <input type="text" id="zip" name="zip"
+                       placeholder="33131" autocomplete="postal-code" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="field">
               <label for="budget">Budget Range</label>
               <select id="budget" name="budget">
                 <option value="">Select your budget</option>
@@ -744,9 +772,10 @@
 
       const name  = document.getElementById('name').value.trim();
       const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-      if (!name || !phone) {
-        alert('Please enter your name and phone number.');
+      if (!name || !phone || !email) {
+        alert('Please enter your name, phone number, and email.');
         return;
       }
 
@@ -760,8 +789,11 @@
           body: JSON.stringify({
             name,
             phone,
-            budget:   document.getElementById('budget').value   || '—',
-            timeline: document.getElementById('timeline').value || '—',
+            email,
+            city:     document.getElementById('city').value.trim()     || '—',
+            zip:      document.getElementById('zip').value.trim()      || '—',
+            budget:   document.getElementById('budget').value          || '—',
+            timeline: document.getElementById('timeline').value        || '—',
           }),
         });
 
@@ -781,7 +813,7 @@
       } catch (err) {
         console.error(err);
         errorMsg.style.display = 'block';
-        submitBtn.textContent = 'Get Listings Now →';
+        submitBtn.textContent = 'Request Private Listings';
         submitBtn.disabled    = false;
       }
     });
