@@ -15,7 +15,7 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ") || "—";
 
   const text = [
-    `<b>New Lead — Miami Properties</b>`,
+    `<b>New Lead — Revara Realty</b>`,
     ``,
     `<b>Name:</b> ${esc(lead.name)}`,
     `<b>Email:</b> <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`,

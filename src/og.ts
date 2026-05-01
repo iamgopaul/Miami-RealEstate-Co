@@ -52,12 +52,12 @@ function buildSvg(heroUri: string): string {
   <text x="600" y="310"
     font-family="Inter, sans-serif"
     font-size="88" font-weight="900" fill="#ffffff"
-    text-anchor="middle" letter-spacing="18">MIAMI</text>
+    text-anchor="middle" letter-spacing="18">REVARA</text>
 
   <text x="600" y="406"
     font-family="Inter, sans-serif"
     font-size="88" font-weight="900" fill="#FF6B35"
-    text-anchor="middle" letter-spacing="18">PROPERTIES</text>
+    text-anchor="middle" letter-spacing="18">REALTY</text>
 
   <rect x="520" y="428" width="160" height="2" fill="#FF6B35" opacity="0.45"/>
 

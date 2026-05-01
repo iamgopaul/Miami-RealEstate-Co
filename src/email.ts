@@ -7,7 +7,7 @@ function client(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
-const FROM  = process.env.RESEND_FROM  ?? "Miami Properties <onboarding@resend.dev>";
+const FROM  = process.env.RESEND_FROM  ?? "Revara Realty <onboarding@resend.dev>";
 const OWNER = process.env.OWNER_EMAIL  ?? "joshgopaul91@gmail.com";
 
 // ── Public API ────────────────────────────────────────────────────────────────
@@ -18,7 +18,7 @@ export async function sendConfirmation(lead: Lead): Promise<void> {
   await resend.emails.send({
     from:    FROM,
     to:      lead.email,
-    subject: "We received your request — Miami Properties",
+    subject: "We received your request — Revara Realty",
     html:    confirmationHtml(lead),
   });
 }
@@ -49,7 +49,7 @@ function confirmationHtml(lead: Lead): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Miami Properties — Request Received</title>
+  <title>Revara Realty — Request Received</title>
 </head>
 <body style="margin:0;padding:0;background:#f0f2f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
@@ -59,7 +59,7 @@ function confirmationHtml(lead: Lead): string {
         <!-- Brand header -->
         <tr><td style="background:#080e1a;border-radius:14px 14px 0 0;padding:32px 40px;text-align:center;">
           <p style="margin:0 0 2px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#FF6B35;">&#9650;</p>
-          <p style="margin:0;font-size:17px;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#ffffff;">MIAMI <span style="color:#FF6B35;">PROPERTIES</span></p>
+          <p style="margin:0;font-size:17px;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#ffffff;">REVARA <span style="color:#FF6B35;">REALTY</span></p>
           <p style="margin:5px 0 0;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.38);">Luxury Real Estate</p>
         </td></tr>
         <tr><td style="background:#FF6B35;height:3px;"></td></tr>
@@ -70,7 +70,7 @@ function confirmationHtml(lead: Lead): string {
             We'll be in touch shortly.
           </h1>
           <p style="margin:0 0 28px;font-size:15px;color:#6b7280;line-height:1.75;">
-            Hi <strong style="color:#080e1a;">${esc(lead.name)}</strong>, thank you for reaching out to Miami Properties.
+            Hi <strong style="color:#080e1a;">${esc(lead.name)}</strong>, thank you for reaching out to Revara Realty.
             One of our advisors will contact you within <strong style="color:#080e1a;">24&nbsp;hours</strong>
             with a curated selection of properties matched to your goals.
           </p>
@@ -93,9 +93,9 @@ function confirmationHtml(lead: Lead): string {
         <!-- Footer -->
         <tr><td style="background:#f8f9fb;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center;border-top:1px solid #e5e7eb;">
           <p style="margin:0 0 5px;font-size:12px;color:#9ca3af;letter-spacing:0.06em;">
-            Brickell &nbsp;&middot;&nbsp; Coral Gables &nbsp;&middot;&nbsp; Design District &nbsp;&middot;&nbsp; Wynwood &nbsp;&middot;&nbsp; Miami Beach
+            Miami &nbsp;&middot;&nbsp; Fort Lauderdale &nbsp;&middot;&nbsp; Boca Raton &nbsp;&middot;&nbsp; West Palm Beach
           </p>
-          <p style="margin:0;font-size:11px;color:#d1d5db;">&copy; 2025 Miami Properties. All rights reserved.</p>
+          <p style="margin:0;font-size:11px;color:#d1d5db;">&copy; 2025 Revara Realty. All rights reserved.</p>
         </td></tr>
 
       </table>
@@ -135,7 +135,7 @@ function ownerHtml(lead: Lead): string {
 
         <!-- Header -->
         <tr><td style="background:#FF6B35;border-radius:12px 12px 0 0;padding:22px 32px;">
-          <p style="margin:0;font-size:18px;font-weight:700;color:#ffffff;">New Lead — Miami Properties</p>
+          <p style="margin:0;font-size:18px;font-weight:700;color:#ffffff;">New Lead — Revara Realty</p>
           <p style="margin:5px 0 0;font-size:13px;color:rgba(255,255,255,0.78);">${esc(time)} EST</p>
         </td></tr>
 
