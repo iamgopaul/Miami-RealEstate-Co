@@ -1,14 +1,10 @@
 {
   "framework": null,
   "rewrites": [
-    { "source": "/",            "destination": "/api/index"     },
     { "source": "/submit",      "destination": "/api/submit"    },
     { "source": "/og-image.png","destination": "/api/og-image"  }
   ],
   "functions": {
-    "api/index.ts": {
-      "includeFiles": "index.html"
-    },
     "api/og-image.ts": {
       "includeFiles": "node_modules/@resvg/resvg-wasm/index_bg.wasm,fonts/Inter-Bold.ttf,hero.jpg",
       "maxDuration": 30
