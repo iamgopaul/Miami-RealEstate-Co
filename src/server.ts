@@ -50,6 +50,13 @@ const server = Bun.serve({
       return new Response(HTML, { headers: HTML_HEADERS });
     }
 
+    // ── robots.txt — allow all crawlers including facebookexternalhit ──
+    if (pathname === "/robots.txt" && req.method === "GET") {
+      return new Response("User-agent: *\nAllow: /\n", {
+        headers: { "Content-Type": "text/plain" },
+      });
+    }
+
     // ── OG image ──
     if (pathname === "/og-image.png" && req.method === "GET") {
       const png = await getOgPng();
