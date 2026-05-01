@@ -2,3 +2,5 @@
 node_modules/
 *.local
 .DS_Store
+# hero image tracked via Git LFS or CDN — keep out of regular commits
+# hero.jpg
