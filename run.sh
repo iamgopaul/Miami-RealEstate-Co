@@ -53,11 +53,13 @@ fi
 
 # ── 5. Free the port if something is already using it ────────────────────
 PORT="${PORT:-3000}"
-EXISTING_PID=$(lsof -ti tcp:"${PORT}" 2>/dev/null || true)
-if [ -n "$EXISTING_PID" ]; then
-  warn "Port ${PORT} in use (PID ${EXISTING_PID}) — stopping it..."
-  kill "$EXISTING_PID" 2>/dev/null || true
-  sleep 0.5
+mapfile -t EXISTING_PIDS < <(lsof -ti tcp:"${PORT}" 2>/dev/null || true)
+if [ ${#EXISTING_PIDS[@]} -gt 0 ]; then
+  warn "Port ${PORT} in use — stopping ${#EXISTING_PIDS[@]} process(es)..."
+  for pid in "${EXISTING_PIDS[@]}"; do
+    kill "$pid" 2>/dev/null || true
+  done
+  sleep 0.8
 fi
 
 # ── 6. Start ─────────────────────────────────────────────────────────────

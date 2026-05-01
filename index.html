@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find your dream home in Miami. Access exclusive listings and connect with top local agents. Get the best deals now.">
-  <meta property="og:title" content="Find Your Dream Home in Miami – Get the Best Deals Now">
-  <meta property="og:description" content="Access exclusive listings and connect with top local agents.">
-  <title>Find Your Dream Home in Miami – Get the Best Deals Now</title>
+  <meta name="description" content="Private access to off-market luxury properties in Brickell, Miami Beach, and Coral Gables. Work with Miami's top real estate advisors.">
+  <meta property="og:title" content="Miami Properties — Luxury Real Estate in Brickell & Miami Beach">
+  <meta property="og:description" content="Private access to off-market listings across Miami's most coveted neighborhoods.">
+  <title>Miami Properties — Luxury Real Estate in Brickell &amp; Miami Beach</title>
+
+  <!-- Favicon: Brickell skyline mark -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23080e1a'/><rect x='2' y='22' width='4' height='9' fill='%23FF6B35'/><rect x='7' y='16' width='4' height='15' fill='%23FF6B35'/><rect x='13' y='9' width='5' height='22' fill='%23FF6B35'/><rect x='19' y='13' width='4' height='18' fill='%23FF6B35' opacity='.85'/><rect x='25' y='19' width='4' height='12' fill='%23FF6B35' opacity='.65'/><rect x='1' y='31' width='30' height='1' fill='%23FF6B35' opacity='.4'/></svg>">
 
   <!-- ─── META PIXEL ─── Replace YOUR_PIXEL_ID with your actual Pixel ID ─── -->
   <script>
@@ -52,6 +55,43 @@
       line-height: 1.6;
     }
 
+    /* ── SITE LOGO ── */
+    .site-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 44px;
+    }
+
+    .site-logo svg { flex-shrink: 0; }
+
+    .site-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .site-logo-name {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .site-logo-name span {
+      color: var(--orange);
+    }
+
+    .site-logo-tagline {
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -62,14 +102,13 @@
       background-image:
         linear-gradient(
           160deg,
-          rgba(0, 5, 16, 0.84) 0%,
-          rgba(0, 10, 28, 0.56) 40%,
-          rgba(0, 5, 16, 0.80) 100%
+          rgba(0, 5, 16, 0.82) 0%,
+          rgba(0, 10, 28, 0.52) 40%,
+          rgba(0, 5, 16, 0.82) 100%
         ),
         url('hero.jpg');
       background-size: cover;
       background-position: center 18%;
-      background-attachment: fixed;
       overflow: hidden;
     }
 
@@ -533,6 +572,24 @@
     </svg>
 
     <div class="hero-inner">
+
+      <!-- Page logo -->
+      <div class="site-logo">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Miami Properties logo mark">
+          <!-- Skyline mark -->
+          <rect x="1"  y="25" width="5"  height="10" rx="1"   fill="#FF6B35"/>
+          <rect x="7"  y="18" width="5"  height="17" rx="1"   fill="#FF6B35"/>
+          <rect x="14" y="10" width="7"  height="25" rx="1"   fill="#FF6B35"/>
+          <rect x="22" y="15" width="5"  height="20" rx="1"   fill="#FF6B35" opacity="0.85"/>
+          <rect x="28" y="21" width="5"  height="14" rx="1"   fill="#FF6B35" opacity="0.65"/>
+          <!-- Ground line -->
+          <rect x="0"  y="35" width="36" height="1"            fill="#FF6B35" opacity="0.35"/>
+        </svg>
+        <div class="site-logo-text">
+          <span class="site-logo-name">MIAMI <span>PROPERTIES</span></span>
+          <span class="site-logo-tagline">Luxury Real Estate</span>
+        </div>
+      </div>
 
       <div class="badge">Brickell &nbsp;·&nbsp; Miami Beach &nbsp;·&nbsp; Coral Gables</div>
 

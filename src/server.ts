@@ -1,19 +1,48 @@
 import { appendLead, type Lead } from "./sheets";
 import { join } from "path";
 
-const HTML = Bun.file(join(import.meta.dir, "../index.html"));
+const ROOT = join(import.meta.dir, "..");
+const HTML = Bun.file(join(ROOT, "index.html"));
+
+// Extensions the server will serve as static assets
+const STATIC_EXTS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".ico"]);
 
 const PORT = Number(process.env.PORT) || 3000;
+
+const MIME: Record<string, string> = {
+  ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+  ".png": "image/png",  ".webp": "image/webp",
+  ".gif": "image/gif",  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+};
 
 const server = Bun.serve({
   port: PORT,
 
   async fetch(req) {
     const url = new URL(req.url);
+    const pathname = url.pathname;
 
     // ── Landing page ──
-    if (url.pathname === "/" && req.method === "GET") {
+    if (pathname === "/" && req.method === "GET") {
       return new Response(HTML);
+    }
+
+    // ── Static assets (images, favicon, etc.) ──
+    if (req.method === "GET") {
+      const dot = pathname.lastIndexOf(".");
+      const ext = dot >= 0 ? pathname.slice(dot).toLowerCase() : "";
+      if (STATIC_EXTS.has(ext)) {
+        const file = Bun.file(join(ROOT, pathname.slice(1)));
+        if (await file.exists()) {
+          return new Response(file, {
+            headers: {
+              "Content-Type": MIME[ext] ?? "application/octet-stream",
+              "Cache-Control": "public, max-age=31536000, immutable",
+            },
+          });
+        }
+      }
     }
 
     // ── Lead submission ──
