@@ -1,0 +1,11 @@
+{
+  "name": "miami-leads",
+  "version": "1.0.0",
+  "scripts": {
+    "dev":   "bun --watch src/server.ts",
+    "start": "bun src/server.ts"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}
