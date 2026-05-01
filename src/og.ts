@@ -81,7 +81,7 @@ function buildSvg(heroUri: string): string {
   <text x="600" y="580"
     font-family="Arial, Helvetica, sans-serif"
     font-size="15" fill="rgba(255,255,255,0.45)"
-    text-anchor="middle" letter-spacing="2">BRICKELL  ·  MIAMI BEACH  ·  CORAL GABLES  ·  WYNWOOD</text>
+    text-anchor="middle" letter-spacing="2">BRICKELL · MIAMI BEACH · CORAL GABLES · WYNWOOD · DESIGN DISTRICT</text>
 
   <!-- Orange bottom bar -->
   <rect x="0" y="625" width="1200" height="5" fill="#FF6B35"/>
