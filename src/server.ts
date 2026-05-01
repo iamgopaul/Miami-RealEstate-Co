@@ -4,7 +4,17 @@ import { sendWhatsAppAlert } from "./whatsapp";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");
-const HTML = Bun.file(join(ROOT, "index.html"));
+
+// Read HTML once at startup, inject env vars so the file stays a clean template
+let htmlSrc = await Bun.file(join(ROOT, "index.html")).text();
+const pixelId = process.env.META_PIXEL_ID ?? "";
+if (pixelId) {
+  htmlSrc = htmlSrc.replaceAll("YOUR_PIXEL_ID", pixelId);
+} else {
+  console.warn("META_PIXEL_ID not set — Meta Pixel will not fire");
+}
+const HTML         = htmlSrc;
+const HTML_HEADERS = { "Content-Type": "text/html; charset=utf-8" };
 
 // Extensions the server will serve as static assets
 const STATIC_EXTS = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg", ".ico"]);
@@ -27,7 +37,7 @@ const server = Bun.serve({
 
     // ── Landing page ──
     if (pathname === "/" && req.method === "GET") {
-      return new Response(HTML);
+      return new Response(HTML, { headers: HTML_HEADERS });
     }
 
     // ── Static assets (images, favicon, etc.) ──
