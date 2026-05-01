@@ -1,4 +1,6 @@
 {
+  "framework": null,
+  "buildCommand": "",
   "rewrites": [
     { "source": "/submit",       "destination": "/api/submit"    },
     { "source": "/og-image.png", "destination": "/api/og-image"  },
