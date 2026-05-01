@@ -273,9 +273,9 @@
       padding: 16px 0;
     }
 
-    .thank-you .icon  { font-size: 44px; margin-bottom: 12px; }
-    .thank-you h3     { font-size: 21px; font-weight: 800; margin-bottom: 8px; }
-    .thank-you p      { font-size: 14px; color: var(--muted); }
+    .thank-you .icon  { font-size: 40px; margin-bottom: 14px; }
+    .thank-you h3     { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: var(--text); }
+    .thank-you p      { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
     /* ── TRUST BAR ── */
     .trust-bar {
@@ -325,9 +325,14 @@
       box-shadow: 0 4px 24px rgba(0,0,0,0.35);
     }
 
-    .benefit-card .icon { font-size: 34px; margin-bottom: 12px; }
-    .benefit-card h3    { font-size: 17px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
-    .benefit-card p     { font-size: 14px; color: var(--muted); }
+    .benefit-card .b-icon {
+      width: 46px; height: 46px;
+      margin: 0 auto 18px;
+      display: block;
+      color: var(--orange);
+    }
+    .benefit-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--text); letter-spacing: 0.01em; }
+    .benefit-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
 
     /* ── FINAL CTA ── */
     .final-cta {
@@ -641,7 +646,7 @@
             </div>
 
             <button type="submit" class="btn-submit" id="submit-btn">
-              Get Listings Now &rarr;
+              Request Private Listings
             </button>
 
             <p class="error-msg" id="error-msg">Something went wrong. Please try again.</p>
@@ -651,9 +656,9 @@
 
         <!-- Shown after successful submit -->
         <div class="thank-you" id="thank-you">
-          <div class="icon">✅</div>
-          <h3>You're on the list!</h3>
-          <p>We'll reach out within 24 hours with exclusive Miami listings tailored to you.</p>
+          <div class="icon">✦</div>
+          <h3>We'll Be in Touch Shortly</h3>
+          <p>An advisor will reach out within 24 hours with a curated selection of properties matched to your goals.</p>
         </div>
 
       </div><!-- /form-card -->
@@ -662,30 +667,44 @@
 
   <!-- ═══════════════════════════ TRUST BAR ══════════════════════════════ -->
   <div class="trust-bar">
-    ⭐&nbsp; Helping Miami buyers find homes faster — trusted by hundreds of families
+    Miami's most trusted real estate advisors &nbsp;·&nbsp; Brickell &nbsp;·&nbsp; Miami Beach &nbsp;·&nbsp; Coral Gables
   </div>
 
   <!-- ══════════════════════════ BENEFITS ═══════════════════════════════ -->
   <section class="benefits">
-    <h2>Why Buyers Choose Us</h2>
+    <h2>The Miami Properties Difference</h2>
     <div class="benefits-grid">
 
       <div class="benefit-card">
-        <div class="icon">🔑</div>
-        <h3>Off-Market Deals</h3>
-        <p>Access exclusive listings not found on Zillow or Realtor.com.</p>
+        <!-- Key icon -->
+        <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="7.5" cy="7.5" r="5.5"/>
+          <path d="M11.5 11.5L21 21"/>
+          <path d="M19 19l-2 2"/>
+          <path d="M16 22l-2-2"/>
+        </svg>
+        <h3>Exclusive Off-Market Access</h3>
+        <p>Gain private entry to curated properties before they ever reach the open market.</p>
       </div>
 
       <div class="benefit-card">
-        <div class="icon">🏆</div>
-        <h3>Top Local Agents</h3>
-        <p>Work with experienced Miami agents who know every neighborhood.</p>
+        <!-- Person/advisor icon -->
+        <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="7" r="4.5"/>
+          <path d="M3 21c0-4.418 4.03-8 9-8s9 3.582 9 8"/>
+        </svg>
+        <h3>Advisors, Not Just Agents</h3>
+        <p>Our specialists know every building, block, and deal in Miami's most coveted neighborhoods.</p>
       </div>
 
       <div class="benefit-card">
-        <div class="icon">💰</div>
-        <h3>Save Time &amp; Money</h3>
-        <p>We do the searching so you can focus on finding the perfect home.</p>
+        <!-- Shield/concierge icon -->
+        <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+        <h3>Concierge-Level Service</h3>
+        <p>From first showing to closing day, every detail is managed with precision and discretion.</p>
       </div>
 
     </div>
@@ -693,21 +712,21 @@
 
   <!-- ══════════════════════════ FINAL CTA ══════════════════════════════ -->
   <section class="final-cta">
-    <h2>Ready to Find Your Miami Home?</h2>
-    <p class="sub">Join hundreds of happy buyers who found their dream home with us.</p>
+    <h2>Your Miami Address Awaits</h2>
+    <p class="sub">Connect with an advisor today and receive a curated selection of properties matched to your lifestyle and investment goals.</p>
     <a href="#form-card" class="btn-cta-lg" onclick="scrollToForm(event)">
-      Get Listings Now &rarr;
+      Request Private Listings
     </a>
   </section>
 
   <!-- ════════════════════ STICKY CTA (mobile only) ═════════════════════ -->
   <div class="sticky-cta" id="sticky-cta">
-    <button onclick="scrollToForm()">Get Listings Now &rarr;</button>
+    <button onclick="scrollToForm()">Request Private Listings</button>
   </div>
 
   <!-- ════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer>
-    <p>&copy; 2025 Miami Homes. All rights reserved.
+    <p>&copy; 2025 Miami Properties. All rights reserved.
       &nbsp;|&nbsp; <a href="#">Privacy Policy</a>
     </p>
   </footer>
