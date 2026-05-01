@@ -7,12 +7,21 @@ const ROOT = join(import.meta.dir, "..");
 
 // Read HTML once at startup, inject env vars so the file stays a clean template
 let htmlSrc = await Bun.file(join(ROOT, "index.html")).text();
+
 const pixelId = process.env.META_PIXEL_ID ?? "";
 if (pixelId) {
   htmlSrc = htmlSrc.replaceAll("YOUR_PIXEL_ID", pixelId);
 } else {
   console.warn("META_PIXEL_ID not set — Meta Pixel will not fire");
 }
+
+const siteUrl = (process.env.SITE_URL ?? "").replace(/\/$/, "");
+if (siteUrl) {
+  htmlSrc = htmlSrc.replaceAll("__SITE_URL__", siteUrl);
+} else {
+  console.warn("SITE_URL not set — og:image will not resolve correctly");
+}
+
 const HTML         = htmlSrc;
 const HTML_HEADERS = { "Content-Type": "text/html; charset=utf-8" };
 
