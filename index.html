@@ -74,12 +74,41 @@
     }
 
     .site-logo-img {
-      height: 110px;
+      height: 130px;
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
       mix-blend-mode: screen;
       animation: logoImageGlow 3s ease-in-out infinite;
+    }
+
+    .site-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .site-logo-name {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: logoGlow 3s ease-in-out infinite;
+    }
+
+    .site-logo-name span {
+      color: var(--orange);
+      animation: logoGlowSpan 3s ease-in-out infinite;
+      animation-delay: 0.3s;
+    }
+
+    .site-logo-tagline {
+      font-size: 9px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
     }
 
     /* ── HERO ── */
@@ -538,6 +567,34 @@
     footer a { color: inherit; text-decoration: underline; }
 
     /* ── ENTRANCE ANIMATIONS ─────────────────────────────────────────────── */
+    @keyframes logoGlow {
+      0%, 100% {
+        text-shadow:
+          0 0 10px rgba(255,255,255,0.80),
+          0 0 24px rgba(255,255,255,0.40),
+          0 0 48px rgba(255,255,255,0.15);
+      }
+      50% {
+        text-shadow:
+          0 0 18px rgba(255,255,255,1),
+          0 0 40px rgba(255,255,255,0.65),
+          0 0 80px rgba(255,255,255,0.30);
+      }
+    }
+    @keyframes logoGlowSpan {
+      0%, 100% {
+        text-shadow:
+          0 0 10px rgba(192,192,192,0.85),
+          0 0 24px rgba(192,192,192,0.45),
+          0 0 48px rgba(192,192,192,0.18);
+      }
+      50% {
+        text-shadow:
+          0 0 18px rgba(220,220,220,1),
+          0 0 40px rgba(192,192,192,0.70),
+          0 0 80px rgba(192,192,192,0.32);
+      }
+    }
     @keyframes logoImageGlow {
       0%, 100% { filter: drop-shadow(0 0 8px rgba(192,192,192,0.45)) drop-shadow(0 0 22px rgba(192,192,192,0.18)); }
       50%       { filter: drop-shadow(0 0 16px rgba(220,220,220,0.75)) drop-shadow(0 0 40px rgba(192,192,192,0.32)); }
@@ -871,6 +928,10 @@
         <!-- Page logo -->
         <div class="site-logo">
           <img src="media/logo/revara-realty-logo.png" alt="Revara Realty" class="site-logo-img">
+          <div class="site-logo-text">
+            <span class="site-logo-name">REVARA <span>REALTY</span></span>
+            <span class="site-logo-tagline">Luxury Real Estate</span>
+          </div>
         </div>
 
         <div class="badge"><span id="badge-text"></span></div>
