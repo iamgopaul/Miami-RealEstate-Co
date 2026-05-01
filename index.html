@@ -15,10 +15,10 @@
   <meta name="twitter:card"  content="summary_large_image">
   <meta name="twitter:title" content="South Florida Off-Market Homes — Get Access Before Everyone Else">
   <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iamgopaul/Miami-RealEstate-Co@main/og-image.png">
-  <title>Revara Realty — South Florida Off-Market Homes</title>
+  <title>Revara Realty</title>
 
   <!-- Favicon: Brickell skyline mark -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23080e1a'/><rect x='2' y='22' width='4' height='9' fill='%23FF6B35'/><rect x='7' y='16' width='4' height='15' fill='%23FF6B35'/><rect x='13' y='9' width='5' height='22' fill='%23FF6B35'/><rect x='19' y='13' width='4' height='18' fill='%23FF6B35' opacity='.85'/><rect x='25' y='19' width='4' height='12' fill='%23FF6B35' opacity='.65'/><rect x='1' y='31' width='30' height='1' fill='%23FF6B35' opacity='.4'/></svg>">
+  <link rel="icon" type="image/png" href="logo.png">
 
   <!-- ─── META PIXEL ─── Replace YOUR_PIXEL_ID with your actual Pixel ID ─── -->
   <script>
@@ -38,18 +38,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --blue:        #38bdf8;
-      --blue-dark:   #0ea5e9;
-      --orange:      #FF6B35;
-      --orange-dark: #e05a27;
+      --blue:        #b8b8b8;
+      --blue-dark:   #909090;
+      --orange:      #C0C0C0;
+      --orange-dark: #9a9a9a;
       --white:       #ffffff;
-      --bg:          #080e1a;
-      --surface:     #0f1829;
-      --surface-hi:  #162038;
-      --light:       #0b1422;
-      --text:        #e8eeff;
-      --muted:       #6b80a8;
-      --border:      #1e2d4a;
+      --bg:          #000000;
+      --surface:     #0d0d0d;
+      --surface-hi:  #1a1a1a;
+      --light:       #080808;
+      --text:        #eeeeee;
+      --muted:       #787878;
+      --border:      #2c2c2c;
       --radius:      10px;
     }
 
@@ -73,7 +73,13 @@
       margin-bottom: 36px;
     }
 
-    .site-logo svg { flex-shrink: 0; }
+    .site-logo-img {
+      height: 64px;
+      width: 64px;
+      object-fit: contain;
+      flex-shrink: 0;
+      mix-blend-mode: screen;
+    }
 
     .site-logo-text {
       display: flex;
@@ -111,9 +117,9 @@
       background-image:
         linear-gradient(
           160deg,
-          rgba(0, 5, 16, 0.82) 0%,
-          rgba(0, 10, 28, 0.52) 40%,
-          rgba(0, 5, 16, 0.82) 100%
+          rgba(0, 0, 0, 0.84) 0%,
+          rgba(0, 0, 0, 0.50) 40%,
+          rgba(0, 0, 0, 0.84) 100%
         ),
         url('hero.jpg');
       background-size: cover;
@@ -201,7 +207,7 @@
 
     .hero h1 em {
       font-style: normal;
-      color: #7dd3fa;
+      color: #d8d8d8;
     }
 
     .hero .sub {
@@ -214,7 +220,7 @@
       display: inline-block;
       padding: 16px 36px;
       background: var(--orange);
-      color: #fff;
+      color: #000;
       font-size: 17px;
       font-weight: 700;
       border-radius: var(--radius);
@@ -284,7 +290,7 @@
       appearance: none;
     }
 
-    .field input::placeholder { color: #2e4060; }
+    .field input::placeholder { color: #444444; }
 
     /* ── CUSTOM AREA DROPDOWN ── */
     .cd { position: relative; }
@@ -307,7 +313,7 @@
     .cd.open .cd-trigger {
       outline: none;
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+      box-shadow: 0 0 0 3px rgba(192,192,192,0.12);
     }
     .cd-trigger svg {
       flex-shrink: 0;
@@ -352,12 +358,12 @@
     .field select:focus {
       outline: none;
       border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+      box-shadow: 0 0 0 3px rgba(192,192,192,0.12);
     }
 
     .field select {
       cursor: pointer;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b80a8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 13px center;
       padding-right: 40px;
@@ -369,7 +375,7 @@
       margin-top: 6px;
       padding: 16px;
       background: var(--orange);
-      color: #fff;
+      color: #000;
       border: none;
       border-radius: var(--radius);
       font-size: 17px;
@@ -492,7 +498,7 @@
     .btn-cta-lg {
       display: inline-block;
       background: var(--orange);
-      color: #fff;
+      color: #000;
       border: none;
       padding: 18px 52px;
       border-radius: 999px;
@@ -530,7 +536,7 @@
       .sticky-cta button {
         width: 100%;
         background: var(--orange);
-        color: #fff;
+        color: #000;
         border: none;
         /* 48px touch target (Apple HIG / Material minimum) */
         padding: 15px;
@@ -574,8 +580,8 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes ctaGlow {
-      0%, 100% { box-shadow: 0 4px 18px rgba(255,107,53,0.2); }
-      50%       { box-shadow: 0 4px 38px rgba(255,107,53,0.52); }
+      0%, 100% { box-shadow: 0 4px 18px rgba(192,192,192,0.18); }
+      50%       { box-shadow: 0 4px 38px rgba(192,192,192,0.42); }
     }
 
     .site-logo { opacity: 0; animation: fadeInScale 0.6s cubic-bezier(0.16,1,0.3,1) forwards 0.1s; }
@@ -636,7 +642,7 @@
       position: fixed;
       bottom: 28px;
       left: 24px;
-      background: rgba(11, 20, 38, 0.94);
+      background: rgba(5, 5, 5, 0.96);
       border: 1px solid rgba(255,255,255,0.09);
       border-radius: 14px;
       padding: 12px 15px;
@@ -836,16 +842,7 @@
 
         <!-- Page logo -->
         <div class="site-logo">
-          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Revara Realty logo mark">
-            <!-- Skyline mark -->
-            <rect x="1"  y="25" width="5"  height="10" rx="1"   fill="#FF6B35"/>
-            <rect x="7"  y="18" width="5"  height="17" rx="1"   fill="#FF6B35"/>
-            <rect x="14" y="10" width="7"  height="25" rx="1"   fill="#FF6B35"/>
-            <rect x="22" y="15" width="5"  height="20" rx="1"   fill="#FF6B35" opacity="0.85"/>
-            <rect x="28" y="21" width="5"  height="14" rx="1"   fill="#FF6B35" opacity="0.65"/>
-            <!-- Ground line -->
-            <rect x="0"  y="35" width="36" height="1"            fill="#FF6B35" opacity="0.35"/>
-          </svg>
+          <img src="logo.png" alt="Revara Realty" class="site-logo-img">
           <div class="site-logo-text">
             <span class="site-logo-name">REVARA <span>REALTY</span></span>
             <span class="site-logo-tagline">Luxury Real Estate</span>
@@ -869,19 +866,19 @@
           <form id="lead-form" novalidate>
 
             <div class="field">
-              <label for="name">Full Name <span style="color:#e55a26">*</span></label>
+              <label for="name">Full Name <span style="color:#C0C0C0">*</span></label>
               <input type="text" id="name" name="name"
                      placeholder="Jane Smith" required autocomplete="name">
             </div>
 
             <div class="field">
-              <label for="phone">Phone Number <span style="color:#e55a26">*</span></label>
+              <label for="phone">Phone Number <span style="color:#C0C0C0">*</span></label>
               <input type="tel" id="phone" name="phone"
                      placeholder="(305) 555-0100" required autocomplete="tel">
             </div>
 
             <div class="field">
-              <label for="email">Email Address <span style="color:#e55a26">*</span></label>
+              <label for="email">Email Address <span style="color:#C0C0C0">*</span></label>
               <input type="email" id="email" name="email"
                      placeholder="jane@example.com" required autocomplete="email">
             </div>
