@@ -549,6 +549,8 @@
     #hero-particles {
       position: absolute;
       inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 0;
     }
@@ -1006,13 +1008,14 @@
     (function () {
       const canvas = document.getElementById('hero-particles');
       if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+      const ctx  = canvas.getContext('2d');
+      const hero = canvas.parentElement;
       let W, H, pts = [];
       const N = 48;
 
       function resize() {
-        W = canvas.width  = canvas.offsetWidth;
-        H = canvas.height = canvas.offsetHeight;
+        W = canvas.width  = hero.offsetWidth;
+        H = canvas.height = hero.offsetHeight;
       }
       resize();
       window.addEventListener('resize', resize, { passive: true });
