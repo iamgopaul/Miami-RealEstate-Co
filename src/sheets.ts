@@ -15,11 +15,14 @@ export interface Lead {
 const HEADERS    = ["Timestamp", "Name", "Email", "Phone", "City", "Zip", "Budget", "Timeline", "Source"];
 const SHEET_NAME = process.env.GOOGLE_SHEET_NAME ?? "Leads";
 
+const PLACEHOLDER = (v: string) =>
+  !v || v.startsWith("your") || v.includes("xxx") || v.includes("...");
+
 function sheetsClient() {
-  const sheetId = process.env.GOOGLE_SHEET_ID;
-  const email   = process.env.GOOGLE_CLIENT_EMAIL;
-  const key     = process.env.GOOGLE_PRIVATE_KEY;
-  if (!sheetId || !email || !key) return null;
+  const sheetId = process.env.GOOGLE_SHEET_ID   ?? "";
+  const email   = process.env.GOOGLE_CLIENT_EMAIL ?? "";
+  const key     = process.env.GOOGLE_PRIVATE_KEY  ?? "";
+  if (PLACEHOLDER(sheetId) || PLACEHOLDER(email) || PLACEHOLDER(key)) return null;
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
