@@ -59,39 +59,39 @@
       display: flex;
       align-items: center;
       padding: 56px 20px 96px;
-      /* Miami magic-hour: night sky → ocean blue → coral sunset → gold → turquoise water */
-      background:
-        radial-gradient(ellipse 60% 28% at 50% 61%, rgba(255,180,60,0.38) 0%, transparent 65%),
-        linear-gradient(to bottom,
-          #0d1b2a 0%,
-          #14375e 18%,
-          #0077b6 38%,
-          #c94b4b 60%,
-          #f0a500 74%,
-          #48cae4 88%,
-          #023e8a 100%
-        );
+      background: #00040c;
       overflow: hidden;
     }
 
-    /* Dot texture */
+    /* Full-bleed SVG cityscape */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Subtle dark vignette at edges so the form card feels grounded */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 28px 28px;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 50%, transparent 60%, rgba(0,2,8,0.55) 100%);
       pointer-events: none;
+      z-index: 1;
     }
 
-    /* Bottom vignette so the form card edge blends */
+    /* Bottom fade into page */
     .hero::after {
       content: '';
       position: absolute;
       bottom: 0; left: 0; right: 0;
-      height: 110px;
-      background: linear-gradient(to bottom, transparent, rgba(2,28,56,0.55));
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, rgba(0,4,12,0.7));
       pointer-events: none;
+      z-index: 1;
     }
 
     /* ── PALM TREES ── */
@@ -100,6 +100,7 @@
       bottom: 0;
       pointer-events: none;
       user-select: none;
+      z-index: 2;
     }
     .palm-right {
       right: -10px;
@@ -410,6 +411,161 @@
   <!-- ═══════════════════════════════ HERO ═══════════════════════════════ -->
   <section class="hero" id="top">
 
+    <!-- Brickell night skyline -->
+    <svg class="hero-bg" viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#00030a"/>
+          <stop offset="45%"  stop-color="#010818"/>
+          <stop offset="78%"  stop-color="#051224"/>
+          <stop offset="100%" stop-color="#091c34"/>
+        </linearGradient>
+        <radialGradient id="gHorizonGlow" cx="50%" cy="100%" r="60%">
+          <stop offset="0%"   stop-color="#f59e0b" stop-opacity="0.20"/>
+          <stop offset="30%"  stop-color="#b45309" stop-opacity="0.09"/>
+          <stop offset="65%"  stop-color="#78350f" stop-opacity="0.03"/>
+          <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#040d1c"/>
+          <stop offset="50%"  stop-color="#020a15"/>
+          <stop offset="100%" stop-color="#01060d"/>
+        </linearGradient>
+        <radialGradient id="gMoon" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#fffbeb" stop-opacity="1"/>
+          <stop offset="50%"  stop-color="#fef3c7" stop-opacity="0.6"/>
+          <stop offset="100%" stop-color="#fde68a" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Soft blur for water reflections -->
+        <filter id="fWater" x="-30%" y="0%" width="160%" height="100%">
+          <feGaussianBlur stdDeviation="3 8"/>
+        </filter>
+        <!-- Red antenna glow -->
+        <filter id="fAntenna" x="-300%" y="-300%" width="700%" height="700%">
+          <feGaussianBlur stdDeviation="2.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Night sky -->
+      <rect width="1440" height="700" fill="url(#gSky)"/>
+      <!-- Warm horizon city glow -->
+      <rect width="1440" height="700" fill="url(#gHorizonGlow)"/>
+
+      <!-- Moon + halo -->
+      <circle cx="195" cy="88" r="44" fill="#fde68a" opacity="0.08"/>
+      <circle cx="195" cy="88" r="28" fill="#fef3c7" opacity="0.15"/>
+      <circle cx="195" cy="88" r="18" fill="url(#gMoon)"/>
+      <circle cx="195" cy="88" r="14" fill="#fffbeb" opacity="0.96"/>
+
+      <!-- Stars -->
+      <g fill="#ffffff">
+        <circle cx="72"   cy="42"  r="1.2" opacity="0.75"/>
+        <circle cx="142"  cy="28"  r="0.8" opacity="0.60"/>
+        <circle cx="258"  cy="18"  r="1.0" opacity="0.65"/>
+        <circle cx="315"  cy="52"  r="0.7" opacity="0.55"/>
+        <circle cx="402"  cy="25"  r="1.3" opacity="0.70"/>
+        <circle cx="468"  cy="64"  r="0.8" opacity="0.60"/>
+        <circle cx="538"  cy="35"  r="1.1" opacity="0.68"/>
+        <circle cx="612"  cy="15"  r="0.9" opacity="0.62"/>
+        <circle cx="698"  cy="44"  r="1.4" opacity="0.72"/>
+        <circle cx="782"  cy="22"  r="0.8" opacity="0.58"/>
+        <circle cx="855"  cy="50"  r="1.0" opacity="0.65"/>
+        <circle cx="938"  cy="32"  r="1.2" opacity="0.70"/>
+        <circle cx="1018" cy="58"  r="0.8" opacity="0.55"/>
+        <circle cx="1095" cy="20"  r="1.1" opacity="0.68"/>
+        <circle cx="1175" cy="40"  r="0.9" opacity="0.62"/>
+        <circle cx="1258" cy="16"  r="1.3" opacity="0.70"/>
+        <circle cx="1340" cy="48"  r="0.7" opacity="0.55"/>
+        <circle cx="1398" cy="28"  r="1.0" opacity="0.63"/>
+        <circle cx="362"  cy="75"  r="0.7" opacity="0.50"/>
+        <circle cx="648"  cy="60"  r="0.8" opacity="0.52"/>
+        <circle cx="1058" cy="13"  r="1.2" opacity="0.68"/>
+        <circle cx="1148" cy="52"  r="0.8" opacity="0.55"/>
+        <circle cx="880"  cy="14"  r="1.0" opacity="0.60"/>
+      </g>
+
+      <!-- ─── BUILDINGS (Brickell skyline silhouette) ─── -->
+      <!-- id used by JS window-generator: data-bx data-by data-bw -->
+      <g id="bldgs" fill="#05101e">
+        <!-- Far left - low-rise fringe -->
+        <rect data-b="1"  x="0"    y="448" width="62"  height="32"/>
+        <rect data-b="2"  x="48"   y="426" width="50"  height="54"/>
+        <rect data-b="3"  x="90"   y="404" width="56"  height="76"/>
+        <!-- Left cluster - stepping up -->
+        <rect data-b="4"  x="138"  y="374" width="54"  height="106"/>
+        <rect data-b="5"  x="186"  y="340" width="66"  height="140"/>
+        <rect data-b="6"  x="246"  y="292" width="58"  height="188"/>
+        <rect data-b="7"  x="298"  y="248" width="70"  height="232"/>
+        <!-- Center-left - towers begin -->
+        <rect data-b="8"  x="358"  y="190" width="86"  height="290"/>
+        <rect data-b="9"  x="432"  y="268" width="50"  height="212"/>
+        <rect data-b="10" x="472"  y="152" width="84"  height="328"/>
+        <rect data-b="11" x="544"  y="220" width="60"  height="260"/>
+        <rect data-b="12" x="592"  y="166" width="74"  height="314"/>
+        <!-- Center - Brickell's tallest (1000 Museum / Brickell City Centre zone) -->
+        <rect data-b="13" x="652"  y="108" width="94"  height="372"/>
+        <rect data-b="14" x="730"  y="168" width="68"  height="312"/>
+        <rect data-b="15" x="783"  y="120" width="86"  height="360"/>
+        <rect data-b="16" x="857"  y="225" width="62"  height="255"/>
+        <!-- Center-right -->
+        <rect data-b="17" x="906"  y="252" width="76"  height="228"/>
+        <rect data-b="18" x="968"  y="302" width="60"  height="178"/>
+        <rect data-b="19" x="1016" y="274" width="66"  height="206"/>
+        <!-- Right cluster - stepping down -->
+        <rect data-b="20" x="1070" y="340" width="58"  height="140"/>
+        <rect data-b="21" x="1118" y="368" width="70"  height="112"/>
+        <rect data-b="22" x="1178" y="352" width="56"  height="128"/>
+        <!-- Far right - low-rise fringe -->
+        <rect data-b="23" x="1226" y="396" width="68"  height="84"/>
+        <rect data-b="24" x="1282" y="418" width="78"  height="62"/>
+        <rect data-b="25" x="1348" y="444" width="92"  height="36"/>
+      </g>
+
+      <!-- Antennas on the tallest towers -->
+      <g stroke="#08182e" stroke-width="2.5" stroke-linecap="round">
+        <line x1="699" y1="108" x2="699" y2="62"/>
+        <line x1="826" y1="120" x2="826" y2="76"/>
+        <line x1="514" y1="152" x2="514" y2="112"/>
+        <line x1="401" y1="190" x2="401" y2="152"/>
+        <line x1="629" y1="166" x2="629" y2="136"/>
+        <line x1="764" y1="168" x2="764" y2="134"/>
+      </g>
+      <!-- Aircraft warning lights -->
+      <g filter="url(#fAntenna)">
+        <circle cx="699" cy="62"  r="3"   fill="#ef4444" opacity="0.90"/>
+        <circle cx="826" cy="76"  r="3"   fill="#ef4444" opacity="0.88"/>
+        <circle cx="514" cy="112" r="2.5" fill="#ef4444" opacity="0.80"/>
+        <circle cx="401" cy="152" r="2.5" fill="#f97316" opacity="0.78"/>
+        <circle cx="629" cy="136" r="2"   fill="#ef4444" opacity="0.72"/>
+      </g>
+
+      <!-- Biscayne Bay -->
+      <rect x="0" y="480" width="1440" height="220" fill="url(#gWater)"/>
+      <!-- Waterline shimmer -->
+      <rect x="0" y="479" width="1440" height="2" fill="#0e2545" opacity="0.5"/>
+
+      <!-- Water light reflections (blurred vertical streaks) -->
+      <g filter="url(#fWater)" opacity="0.45">
+        <rect x="684"  y="481" width="14" height="80"  fill="#fbbf24"/>
+        <rect x="820"  y="481" width="10" height="68"  fill="#fbbf24"/>
+        <rect x="508"  y="481" width="9"  height="58"  fill="#fed7aa"/>
+        <rect x="638"  y="481" width="8"  height="52"  fill="#fde68a"/>
+        <rect x="758"  y="481" width="9"  height="50"  fill="#fde68a"/>
+        <rect x="916"  y="481" width="8"  height="44"  fill="#bfdbfe"/>
+        <rect x="386"  y="481" width="7"  height="38"  fill="#fed7aa"/>
+        <rect x="308"  y="481" width="6"  height="30"  fill="#bfdbfe"/>
+        <rect x="1038" y="481" width="7"  height="36"  fill="#bfdbfe"/>
+        <rect x="1148" y="481" width="6"  height="26"  fill="#bfdbfe"/>
+        <rect x="1080" y="481" width="5"  height="22"  fill="#fde68a"/>
+        <rect x="462"  y="481" width="6"  height="32"  fill="#fde68a"/>
+        <rect x="860"  y="481" width="7"  height="40"  fill="#fed7aa"/>
+      </g>
+
+      <!-- Window lights placeholder — filled by JS below -->
+      <g id="wins"></g>
+    </svg>
+
     <!-- Palm tree silhouettes -->
     <svg class="palm palm-right" viewBox="0 0 220 560" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <!-- trunk: leans left gently -->
@@ -648,6 +804,42 @@
       stickyCta.style.opacity       = entries[0].isIntersecting ? '0'    : '1';
       stickyCta.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
     }, { threshold: 0.4 }).observe(document.getElementById('form-card'));
+
+    // ── Brickell window lights ────────────────────────────────────────────
+    // Seeded LCG so windows are identical on every load (not random flicker)
+    (function () {
+      let s = 20250501;
+      function rnd() { s = (s * 1664525 + 1013904223) & 0xffffffff; return (s >>> 0) / 4294967295; }
+
+      const ns   = 'http://www.w3.org/2000/svg';
+      const wins = document.getElementById('wins');
+      if (!wins) return;
+
+      const bottom  = 480;
+      const ww = 4, wh = 3, colStep = 13, rowStep = 11, margin = 7;
+      const palette = ['#fbbf24','#fde68a','#fed7aa','#fffbeb','#e0f2fe','#bfdbfe','#ffffff'];
+
+      document.querySelectorAll('#bldgs rect').forEach(b => {
+        const bx  = +b.getAttribute('x');
+        const by  = +b.getAttribute('y');
+        const bw  = +b.getAttribute('width');
+
+        for (let wx = bx + margin; wx + ww <= bx + bw - margin; wx += colStep) {
+          for (let wy = by + 10; wy + wh <= bottom - 8; wy += rowStep) {
+            if (rnd() < 0.54) {
+              const r = document.createElementNS(ns, 'rect');
+              r.setAttribute('x', wx);
+              r.setAttribute('y', wy);
+              r.setAttribute('width',  ww);
+              r.setAttribute('height', wh);
+              r.setAttribute('fill',   palette[Math.floor(rnd() * palette.length)]);
+              r.setAttribute('opacity', (0.45 + rnd() * 0.55).toFixed(2));
+              wins.appendChild(r);
+            }
+          }
+        }
+      });
+    })();
   </script>
 
 </body>
