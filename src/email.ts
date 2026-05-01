@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import type { Lead } from "./sheets";
+import { esc } from "./utils";
 
-// Lazy — only instantiated when RESEND_API_KEY is present
 function client(): Resend | null {
   const key = process.env.RESEND_API_KEY;
   return key ? new Resend(key) : null;
@@ -39,9 +39,9 @@ export async function sendOwnerAlert(lead: Lead): Promise<void> {
 function confirmationHtml(lead: Lead): string {
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ");
   const summary  = [
-    lead.budget   !== "—" ? row("Budget",   lead.budget)   : "",
-    lead.timeline !== "—" ? row("Timeline", lead.timeline) : "",
-    location              ? row("Location", location)      : "",
+    lead.budget   !== "—" ? summaryRow("Budget",   lead.budget)   : "",
+    lead.timeline !== "—" ? summaryRow("Timeline", lead.timeline) : "",
+    location              ? summaryRow("Location", location)      : "",
   ].filter(Boolean).join("");
 
   return `<!DOCTYPE html>
@@ -114,17 +114,6 @@ function ownerHtml(lead: Lead): string {
 
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ") || "—";
 
-  function dataRow(label: string, value: string, href?: string): string {
-    const val = href
-      ? `<a href="${href}" style="color:#0077B6;text-decoration:none;font-size:15px;">${esc(value)}</a>`
-      : `<strong style="color:#111827;font-size:15px;">${esc(value)}</strong>`;
-    return `<tr>
-      <td style="padding:11px 0;border-bottom:1px solid #f3f4f6;vertical-align:top;">
-        <span style="font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.07em;">${label}</span><br>${val}
-      </td>
-    </tr>`;
-  }
-
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -163,7 +152,9 @@ function ownerHtml(lead: Lead): string {
 </html>`;
 }
 
-function row(label: string, value: string): string {
+// ── Template helpers ──────────────────────────────────────────────────────────
+
+function summaryRow(label: string, value: string): string {
   return `<tr>
     <td style="padding:4px 0;">
       <span style="font-size:13px;color:#9ca3af;">${label}&nbsp;&nbsp;</span>
@@ -172,6 +163,13 @@ function row(label: string, value: string): string {
   </tr>`;
 }
 
-function esc(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+function dataRow(label: string, value: string, href?: string): string {
+  const val = href
+    ? `<a href="${href}" style="color:#0077B6;text-decoration:none;font-size:15px;">${esc(value)}</a>`
+    : `<strong style="color:#111827;font-size:15px;">${esc(value)}</strong>`;
+  return `<tr>
+    <td style="padding:11px 0;border-bottom:1px solid #f3f4f6;vertical-align:top;">
+      <span style="font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.07em;">${label}</span><br>${val}
+    </td>
+  </tr>`;
 }

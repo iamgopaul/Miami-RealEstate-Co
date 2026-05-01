@@ -8,7 +8,7 @@
   ],
   "functions": {
     "api/og-image.ts": {
-      "includeFiles": "node_modules/@resvg/resvg-wasm/index_bg.wasm,fonts/Inter-Bold.ttf,media/page-wallpapers/hero.jpg",
+      "includeFiles": "node_modules/@resvg/resvg-wasm/index_bg.wasm,fonts/Inter-Bold.ttf,media/page-wallpapers/hero.jpg,media/logo/revara-realty-logo.png",
       "maxDuration": 30
     }
   }

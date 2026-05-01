@@ -1,5 +1,5 @@
 {
-  "name": "miami-leads",
+  "name": "revara-realty",
   "version": "1.0.0",
   "scripts": {
     "dev": "bun --watch src/server.ts"

@@ -1,4 +1,5 @@
 import type { Lead } from "./sheets";
+import { esc } from "./utils";
 
 export async function sendTelegramAlert(lead: Lead): Promise<void> {
   const token  = process.env.TELEGRAM_BOT_TOKEN;
@@ -42,6 +43,3 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
   }
 }
 
-function esc(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
