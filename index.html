@@ -776,7 +776,7 @@
           </div>
         </div>
 
-        <div class="badge">Brickell &nbsp;·&nbsp; Coral Gables &nbsp;·&nbsp; Design District &nbsp;·&nbsp; Wynwood &nbsp;·&nbsp; Miami Beach</div>
+        <div class="badge"><span id="badge-text">Brickell · Coral Gables · Design District</span></div>
 
         <h1>Live Where Miami's Elite<br>Call Home</h1>
         <p class="sub">Private access to off-market listings across Miami's most coveted neighborhoods, with top advisors in your corner from search to close.</p>
@@ -868,7 +868,7 @@
 
   <!-- ═══════════════════════════ TRUST BAR ══════════════════════════════ -->
   <div class="trust-bar">
-    Miami's most trusted real estate advisors &nbsp;·&nbsp; Brickell &nbsp;·&nbsp; Coral Gables &nbsp;·&nbsp; Design District &nbsp;·&nbsp; Wynwood &nbsp;·&nbsp; Miami Beach
+    Miami's most trusted real estate advisors &nbsp;·&nbsp; Private access across Miami's finest neighborhoods
   </div>
 
   <!-- ══════════════════════════ BENEFITS ═══════════════════════════════ -->
@@ -1108,6 +1108,35 @@
       el.addEventListener('focus', () => { label.style.color = 'var(--blue)'; });
       el.addEventListener('blur',  () => { label.style.color = ''; });
     });
+
+    // ── BADGE NEIGHBORHOOD CYCLING ───────────────────────────────────────
+    (function() {
+      const neighborhoods = [
+        'Brickell', 'Coral Gables', 'Design District',
+        'Wynwood', 'Miami Beach', 'Edgewater',
+        'Coconut Grove', 'South Beach', 'Midtown Miami',
+        'Key Biscayne', 'Aventura', 'Little Havana',
+        'Surfside', 'Bal Harbour', 'Sunny Isles Beach',
+        'Doral', 'Pinecrest', 'South Miami', 'Sweetwater',
+      ];
+      const el = document.getElementById('badge-text');
+      if (!el) return;
+      el.style.transition = 'opacity 1.5s ease';
+      let idx = 0;
+      function cycle() {
+        el.style.opacity = '0';
+        setTimeout(() => {
+          el.textContent = [
+            neighborhoods[idx % neighborhoods.length],
+            neighborhoods[(idx + 1) % neighborhoods.length],
+            neighborhoods[(idx + 2) % neighborhoods.length],
+          ].join(' · ');
+          el.style.opacity = '1';
+          idx = (idx + 3) % neighborhoods.length;
+        }, 1500);
+      }
+      setInterval(cycle, 8000);
+    })();
 
   </script>
 
