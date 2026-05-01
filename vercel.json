@@ -1,8 +1,8 @@
 {
-  "framework": null,
   "rewrites": [
-    { "source": "/submit",      "destination": "/api/submit"    },
-    { "source": "/og-image.png","destination": "/api/og-image"  }
+    { "source": "/submit",       "destination": "/api/submit"    },
+    { "source": "/og-image.png", "destination": "/api/og-image"  },
+    { "source": "/",             "destination": "/index.html"    }
   ],
   "functions": {
     "api/og-image.ts": {

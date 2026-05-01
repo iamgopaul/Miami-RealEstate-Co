@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Private access to off-market luxury properties in Brickell, Coral Gables, Design District, Wynwood, and Miami Beach. Work with Miami's top real estate advisors.">
+  <meta name="description" content="Get access to off-market homes in South Florida before everyone else. Exclusive listings in Miami, Fort Lauderdale, Boca Raton, and West Palm Beach.">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="https://miami-real-estate-co.vercel.app">
-  <meta property="og:title"       content="Miami Properties — Luxury Real Estate in Brickell & Miami Beach">
-  <meta property="og:description" content="Private access to off-market listings across Miami's most coveted neighborhoods.">
+  <meta property="og:title"       content="South Florida Off-Market Homes — Get Access Before Everyone Else">
+  <meta property="og:description" content="Exclusive listings across Miami, Fort Lauderdale, Boca Raton, and West Palm Beach. Connect with top local agents instantly.">
   <meta property="og:image"        content="https://cdn.jsdelivr.net/gh/iamgopaul/Miami-RealEstate-Co@main/og-image.png">
   <meta property="og:image:type"   content="image/png">
   <meta property="og:image:width"  content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card"  content="summary_large_image">
-  <meta name="twitter:title" content="Miami Properties — Luxury Real Estate in Brickell & Miami Beach">
+  <meta name="twitter:title" content="South Florida Off-Market Homes — Get Access Before Everyone Else">
   <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iamgopaul/Miami-RealEstate-Co@main/og-image.png">
-  <title>Miami Properties — Luxury Real Estate in Brickell &amp; Miami Beach</title>
+  <title>South Florida Off-Market Homes — Get Access Before Everyone Else</title>
 
   <!-- Favicon: Brickell skyline mark -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='5' fill='%23080e1a'/><rect x='2' y='22' width='4' height='9' fill='%23FF6B35'/><rect x='7' y='16' width='4' height='15' fill='%23FF6B35'/><rect x='13' y='9' width='5' height='22' fill='%23FF6B35'/><rect x='19' y='13' width='4' height='18' fill='%23FF6B35' opacity='.85'/><rect x='25' y='19' width='4' height='12' fill='%23FF6B35' opacity='.65'/><rect x='1' y='31' width='30' height='1' fill='%23FF6B35' opacity='.4'/></svg>">
@@ -210,8 +210,24 @@
     .hero .sub {
       font-size: clamp(15px, 2.5vw, 18px);
       color: rgba(255,255,255,0.82);
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
+
+    .btn-hero-cta {
+      display: inline-block;
+      padding: 16px 36px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 700;
+      border-radius: var(--radius);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: background 0.18s, transform 0.1s;
+      margin-bottom: 8px;
+    }
+    .btn-hero-cta:hover  { background: var(--orange-dark); }
+    .btn-hero-cta:active { transform: scale(0.985); }
 
     /* ── FORM CARD ── */
     .form-card {
@@ -781,8 +797,9 @@
 
         <div class="badge"><span id="badge-text"></span></div>
 
-        <h1>Live Where Miami's Elite<br>Call Home</h1>
-        <p class="sub">Private access to off-market listings across Miami's most coveted neighborhoods, with top advisors in your corner from search to close.</p>
+        <h1>Get Access to Off-Market Homes Across<br><em>South Florida</em> Before Anyone Else Does</h1>
+        <p class="sub">Exclusive listings in Miami, Fort Lauderdale, Boca Raton &amp; West Palm Beach — matched to your budget and delivered directly to you.</p>
+        <a href="#form-card" class="btn-hero-cta" onclick="scrollToForm(event)">Get Listings Now</a>
 
       </div><!-- /hero-content -->
 
@@ -812,17 +829,55 @@
                      placeholder="jane@example.com" required autocomplete="email">
             </div>
 
-            <div class="field-row">
-              <div class="field">
-                <label for="city">City</label>
-                <input type="text" id="city" name="city"
-                       placeholder="Miami" autocomplete="address-level2">
-              </div>
-              <div class="field">
-                <label for="zip">Zip Code</label>
-                <input type="text" id="zip" name="zip"
-                       placeholder="33131" autocomplete="postal-code" inputmode="numeric">
-              </div>
+            <div class="field">
+              <label for="area">Preferred Area</label>
+              <select id="area" name="area">
+                <option value="">Select your area</option>
+                <option value="Miami">Miami</option>
+                <option value="Fort Lauderdale">Fort Lauderdale</option>
+                <option value="Boca Raton">Boca Raton</option>
+                <option value="West Palm Beach">West Palm Beach</option>
+                <option value="Coral Gables">Coral Gables</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Sunny Isles Beach">Sunny Isles Beach</option>
+                <option value="Hollywood">Hollywood</option>
+                <option value="Hallandale Beach">Hallandale Beach</option>
+                <option value="Doral">Doral</option>
+                <option value="Hialeah">Hialeah</option>
+                <option value="Homestead">Homestead</option>
+                <option value="Kendall">Kendall</option>
+                <option value="Miramar">Miramar</option>
+                <option value="Pembroke Pines">Pembroke Pines</option>
+                <option value="Coral Springs">Coral Springs</option>
+                <option value="Pompano Beach">Pompano Beach</option>
+                <option value="Deerfield Beach">Deerfield Beach</option>
+                <option value="Delray Beach">Delray Beach</option>
+                <option value="Boynton Beach">Boynton Beach</option>
+                <option value="Lake Worth Beach">Lake Worth Beach</option>
+                <option value="Palm Beach Gardens">Palm Beach Gardens</option>
+                <option value="Jupiter">Jupiter</option>
+                <option value="Stuart">Stuart</option>
+                <option value="Port St. Lucie">Port St. Lucie</option>
+                <option value="Wellington">Wellington</option>
+                <option value="Weston">Weston</option>
+                <option value="Plantation">Plantation</option>
+                <option value="Davie">Davie</option>
+                <option value="Coconut Grove">Coconut Grove</option>
+                <option value="South Beach">South Beach</option>
+                <option value="Wynwood">Wynwood</option>
+                <option value="Brickell">Brickell</option>
+                <option value="Midtown Miami">Midtown Miami</option>
+                <option value="Edgewater">Edgewater</option>
+                <option value="Key Biscayne">Key Biscayne</option>
+                <option value="Pinecrest">Pinecrest</option>
+                <option value="Naples">Naples</option>
+                <option value="Cape Coral">Cape Coral</option>
+                <option value="Fort Myers">Fort Myers</option>
+                <option value="Sarasota">Sarasota</option>
+                <option value="Tampa">Tampa</option>
+                <option value="Orlando">Orlando</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
 
             <div class="field">
@@ -850,7 +905,7 @@
             </div>
 
             <button type="submit" class="btn-submit" id="submit-btn">
-              Request Private Listings
+              Get Listings Now
             </button>
 
             <p class="error-msg" id="error-msg">Something went wrong. Please try again.</p>
@@ -861,8 +916,8 @@
         <!-- Shown after successful submit -->
         <div class="thank-you" id="thank-you">
           <div class="icon">✦</div>
-          <h3>We'll Be in Touch Shortly</h3>
-          <p>An advisor will reach out within 24 hours with a curated selection of properties matched to your goals.</p>
+          <h3>You're In — Listings Coming Your Way</h3>
+          <p>A local advisor will be in touch within 24 hours with a curated selection of off-market properties matched to your goals.</p>
         </div>
 
       </div><!-- /form-card -->
@@ -871,66 +926,66 @@
 
   <!-- ═══════════════════════════ TRUST BAR ══════════════════════════════ -->
   <div class="trust-bar">
-    Miami's most trusted real estate advisors &nbsp;·&nbsp; Private access across Miami's finest neighborhoods
+    Helping South Florida buyers find homes faster
   </div>
 
   <!-- ══════════════════════════ BENEFITS ═══════════════════════════════ -->
   <section class="benefits">
-    <h2>The Miami Properties Difference</h2>
+    <h2>Why Buyers Choose Us</h2>
     <div class="benefits-grid">
 
       <div class="benefit-card">
-        <!-- Key icon -->
         <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="7.5" cy="7.5" r="5.5"/>
           <path d="M11.5 11.5L21 21"/>
           <path d="M19 19l-2 2"/>
           <path d="M16 22l-2-2"/>
         </svg>
-        <h3>Exclusive Off-Market Access</h3>
-        <p>Gain private entry to curated properties before they ever reach the open market.</p>
+        <h3>Access Off-Market Deals</h3>
+        <p>See properties before they're listed publicly — homes that never appear on Zillow or Realtor.com.</p>
       </div>
 
       <div class="benefit-card">
-        <!-- Person/advisor icon -->
         <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="7" r="4.5"/>
           <path d="M3 21c0-4.418 4.03-8 9-8s9 3.582 9 8"/>
         </svg>
-        <h3>Advisors, Not Just Agents</h3>
-        <p>Our specialists know every building, block, and deal in Miami's most coveted neighborhoods.</p>
+        <h3>Work With Top Local Agents</h3>
+        <p>Get connected with the highest-rated agents in your area — people who know the neighbourhoods and close deals.</p>
       </div>
 
       <div class="benefit-card">
-        <!-- Shield/concierge icon -->
         <svg class="b-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/>
-          <path d="M9 12l2 2 4-4"/>
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M12 7v5l3 3"/>
         </svg>
-        <h3>Concierge-Level Service</h3>
-        <p>From first showing to closing day, every detail is managed with precision and discretion.</p>
+        <h3>Save Time and Money</h3>
+        <p>No endless scrolling. We curate the right options for your goals and help you negotiate the best price.</p>
       </div>
 
+    </div>
+    <div style="text-align:center; margin-top: 40px;">
+      <a href="#form-card" class="btn-cta-lg" onclick="scrollToForm(event)">Get Listings Now</a>
     </div>
   </section>
 
   <!-- ══════════════════════════ FINAL CTA ══════════════════════════════ -->
   <section class="final-cta">
-    <h2>Your Miami Address Awaits</h2>
-    <p class="sub">Connect with an advisor today and receive a curated selection of properties matched to your lifestyle and investment goals.</p>
+    <h2>Your South Florida Home Is Waiting</h2>
+    <p class="sub">Join hundreds of buyers who discovered their home through our private network — before it ever hit the public market.</p>
     <a href="#form-card" class="btn-cta-lg" onclick="scrollToForm(event)">
-      Request Private Listings
+      Get Listings Now
     </a>
   </section>
 
   <!-- ════════════════════ STICKY CTA (mobile only) ═════════════════════ -->
   <div class="sticky-cta" id="sticky-cta">
-    <button onclick="scrollToForm()">Request Private Listings</button>
+    <button onclick="scrollToForm()">Get Listings Now</button>
   </div>
 
   <!-- ════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer>
-    <p>&copy; 2025 Miami Properties. All rights reserved.
+    <p>&copy; 2025 South Florida Properties. All rights reserved.
       &nbsp;|&nbsp; <a href="#">Privacy Policy</a>
     </p>
   </footer>
@@ -966,8 +1021,8 @@
             name,
             phone,
             email,
-            city:     document.getElementById('city').value.trim()     || '—',
-            zip:      document.getElementById('zip').value.trim()      || '—',
+            city:     document.getElementById('area').value            || '—',
+            zip:      '—',
             budget:   document.getElementById('budget').value          || '—',
             timeline: document.getElementById('timeline').value        || '—',
           }),
@@ -989,7 +1044,7 @@
       } catch (err) {
         console.error(err);
         errorMsg.style.display = 'block';
-        submitBtn.textContent = 'Request Private Listings';
+        submitBtn.textContent = 'Get Listings Now';
         submitBtn.disabled    = false;
       }
     });
@@ -1083,12 +1138,12 @@
       const msgEl  = document.getElementById('toast-msg');
       const timeEl = document.getElementById('toast-time');
       const items  = [
-        { msg: 'Someone from Brickell just requested listings',    time: 'Just now' },
-        { msg: 'A buyer from Miami Beach is reviewing properties', time: '3 min ago' },
-        { msg: 'New inquiry from Coral Gables',                    time: '6 min ago' },
-        { msg: 'A family from Coconut Grove submitted a request',  time: '9 min ago' },
-        { msg: 'Someone is browsing $2M+ listings',                time: '12 min ago' },
-        { msg: 'A Wynwood buyer requested a consultation',         time: '15 min ago' },
+        { msg: 'Someone in Fort Lauderdale just requested listings',     time: 'Just now' },
+        { msg: 'A buyer in Boca Raton is reviewing off-market homes',    time: '4 min ago' },
+        { msg: 'New inquiry from West Palm Beach',                       time: '7 min ago' },
+        { msg: 'A family in Miami just connected with an agent',         time: '11 min ago' },
+        { msg: 'Someone is browsing $800K–$1.2M listings in Aventura',  time: '14 min ago' },
+        { msg: 'A Coral Gables buyer submitted a request',              time: '18 min ago' },
       ];
       let idx = 0;
       function show() {
@@ -1114,14 +1169,13 @@
 
     // ── BADGE NEIGHBORHOOD CYCLING ───────────────────────────────────────
     (function() {
-      // Groups hand-balanced for equal visual width
       const groups = [
-        'Brickell · Coral Gables · Design District',
-        'Wynwood · Miami Beach · Coconut Grove',
-        'South Beach · Midtown Miami · Edgewater',
-        'Key Biscayne · Little Havana · Surfside',
-        'Sunny Isles Beach · Doral · Sweetwater',
-        'Pinecrest · South Miami · Bal Harbour',
+        'Miami · Fort Lauderdale · Boca Raton',
+        'West Palm Beach · Coral Gables · Aventura',
+        'Sunny Isles Beach · Hollywood · Doral',
+        'Coconut Grove · South Beach · Wynwood',
+        'Palm Beach Gardens · Delray Beach · Weston',
+        'Pompano Beach · Deerfield Beach · Miramar',
       ];
       const el = document.getElementById('badge-text');
       if (!el) return;
