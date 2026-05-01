@@ -289,6 +289,12 @@
 
     .field input::placeholder { color: #2e4060; }
 
+    .field-compact select {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-size: 14px;
+    }
+
     .field select option { background: var(--surface); color: var(--text); }
 
     .field input:focus,
@@ -829,53 +835,65 @@
                      placeholder="jane@example.com" required autocomplete="email">
             </div>
 
-            <div class="field">
+            <div class="field field-compact">
               <label for="area">Preferred Area</label>
               <select id="area" name="area">
                 <option value="">Select your area</option>
-                <option value="Miami">Miami</option>
-                <option value="Fort Lauderdale">Fort Lauderdale</option>
-                <option value="Boca Raton">Boca Raton</option>
-                <option value="West Palm Beach">West Palm Beach</option>
-                <option value="Coral Gables">Coral Gables</option>
-                <option value="Aventura">Aventura</option>
-                <option value="Sunny Isles Beach">Sunny Isles Beach</option>
-                <option value="Hollywood">Hollywood</option>
-                <option value="Hallandale Beach">Hallandale Beach</option>
-                <option value="Doral">Doral</option>
-                <option value="Hialeah">Hialeah</option>
-                <option value="Homestead">Homestead</option>
-                <option value="Kendall">Kendall</option>
-                <option value="Miramar">Miramar</option>
-                <option value="Pembroke Pines">Pembroke Pines</option>
-                <option value="Coral Springs">Coral Springs</option>
-                <option value="Pompano Beach">Pompano Beach</option>
-                <option value="Deerfield Beach">Deerfield Beach</option>
-                <option value="Delray Beach">Delray Beach</option>
-                <option value="Boynton Beach">Boynton Beach</option>
-                <option value="Lake Worth Beach">Lake Worth Beach</option>
-                <option value="Palm Beach Gardens">Palm Beach Gardens</option>
-                <option value="Jupiter">Jupiter</option>
-                <option value="Stuart">Stuart</option>
-                <option value="Port St. Lucie">Port St. Lucie</option>
-                <option value="Wellington">Wellington</option>
-                <option value="Weston">Weston</option>
-                <option value="Plantation">Plantation</option>
-                <option value="Davie">Davie</option>
-                <option value="Coconut Grove">Coconut Grove</option>
-                <option value="South Beach">South Beach</option>
-                <option value="Wynwood">Wynwood</option>
-                <option value="Brickell">Brickell</option>
-                <option value="Midtown Miami">Midtown Miami</option>
-                <option value="Edgewater">Edgewater</option>
-                <option value="Key Biscayne">Key Biscayne</option>
-                <option value="Pinecrest">Pinecrest</option>
-                <option value="Naples">Naples</option>
-                <option value="Cape Coral">Cape Coral</option>
-                <option value="Fort Myers">Fort Myers</option>
-                <option value="Sarasota">Sarasota</option>
-                <option value="Tampa">Tampa</option>
-                <option value="Orlando">Orlando</option>
+                <optgroup label="── Miami-Dade ──">
+                  <option value="Miami">Miami</option>
+                  <option value="Brickell">Brickell</option>
+                  <option value="South Beach">South Beach</option>
+                  <option value="Wynwood">Wynwood</option>
+                  <option value="Coral Gables">Coral Gables</option>
+                  <option value="Coconut Grove">Coconut Grove</option>
+                  <option value="Aventura">Aventura</option>
+                  <option value="Sunny Isles Beach">Sunny Isles Beach</option>
+                  <option value="Key Biscayne">Key Biscayne</option>
+                  <option value="Midtown Miami">Midtown Miami</option>
+                  <option value="Edgewater">Edgewater</option>
+                  <option value="Doral">Doral</option>
+                  <option value="Hialeah">Hialeah</option>
+                  <option value="Kendall">Kendall</option>
+                  <option value="Homestead">Homestead</option>
+                  <option value="Pinecrest">Pinecrest</option>
+                </optgroup>
+                <optgroup label="── Broward ──">
+                  <option value="Fort Lauderdale">Fort Lauderdale</option>
+                  <option value="Hollywood">Hollywood</option>
+                  <option value="Hallandale Beach">Hallandale Beach</option>
+                  <option value="Miramar">Miramar</option>
+                  <option value="Pembroke Pines">Pembroke Pines</option>
+                  <option value="Coral Springs">Coral Springs</option>
+                  <option value="Pompano Beach">Pompano Beach</option>
+                  <option value="Deerfield Beach">Deerfield Beach</option>
+                  <option value="Weston">Weston</option>
+                  <option value="Plantation">Plantation</option>
+                  <option value="Davie">Davie</option>
+                </optgroup>
+                <optgroup label="── Palm Beach ──">
+                  <option value="Boca Raton">Boca Raton</option>
+                  <option value="West Palm Beach">West Palm Beach</option>
+                  <option value="Delray Beach">Delray Beach</option>
+                  <option value="Boynton Beach">Boynton Beach</option>
+                  <option value="Palm Beach Gardens">Palm Beach Gardens</option>
+                  <option value="Jupiter">Jupiter</option>
+                  <option value="Wellington">Wellington</option>
+                  <option value="Lake Worth Beach">Lake Worth Beach</option>
+                </optgroup>
+                <optgroup label="── Treasure Coast ──">
+                  <option value="Stuart">Stuart</option>
+                  <option value="Port St. Lucie">Port St. Lucie</option>
+                  <option value="Vero Beach">Vero Beach</option>
+                </optgroup>
+                <optgroup label="── Rest of Florida ──">
+                  <option value="Naples">Naples</option>
+                  <option value="Cape Coral">Cape Coral</option>
+                  <option value="Fort Myers">Fort Myers</option>
+                  <option value="Sarasota">Sarasota</option>
+                  <option value="Tampa">Tampa</option>
+                  <option value="Orlando">Orlando</option>
+                  <option value="Jacksonville">Jacksonville</option>
+                </optgroup>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -1169,26 +1187,40 @@
 
     // ── BADGE NEIGHBORHOOD CYCLING ───────────────────────────────────────
     (function() {
-      const groups = [
-        'Miami · Fort Lauderdale · Boca Raton',
-        'West Palm Beach · Coral Gables · Aventura',
-        'Sunny Isles Beach · Hollywood · Doral',
-        'Coconut Grove · South Beach · Wynwood',
-        'Palm Beach Gardens · Delray Beach · Weston',
-        'Pompano Beach · Deerfield Beach · Miramar',
+      const allAreas = [
+        'Miami','Brickell','South Beach','Wynwood','Coral Gables',
+        'Coconut Grove','Aventura','Sunny Isles Beach','Key Biscayne',
+        'Midtown Miami','Edgewater','Doral','Hialeah','Kendall',
+        'Homestead','Pinecrest','Fort Lauderdale','Hollywood',
+        'Hallandale Beach','Miramar','Pembroke Pines','Coral Springs',
+        'Pompano Beach','Deerfield Beach','Weston','Plantation','Davie',
+        'Boca Raton','West Palm Beach','Delray Beach','Boynton Beach',
+        'Palm Beach Gardens','Jupiter','Wellington','Lake Worth Beach',
+        'Stuart','Port St. Lucie','Naples','Sarasota','Tampa','Orlando',
       ];
+      function shuffle(arr) {
+        const a = [...arr];
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+      let deck = shuffle(allAreas);
+      let pos  = 0;
+      function nextGroup() {
+        if (pos + 3 > deck.length) { deck = shuffle(allAreas); pos = 0; }
+        const trio = deck.slice(pos, pos + 3);
+        pos += 3;
+        return trio.join(' · ');
+      }
       const el = document.getElementById('badge-text');
       if (!el) return;
-      let idx = 0;
-      el.textContent = groups[idx++];
+      el.textContent = nextGroup();
       el.style.transition = 'opacity 1.5s ease';
       function cycle() {
         el.style.opacity = '0';
-        setTimeout(() => {
-          el.textContent = groups[idx % groups.length];
-          idx = (idx + 1) % groups.length;
-          el.style.opacity = '1';
-        }, 1500);
+        setTimeout(() => { el.textContent = nextGroup(); el.style.opacity = '1'; }, 1500);
       }
       setInterval(cycle, 8000);
     })();
