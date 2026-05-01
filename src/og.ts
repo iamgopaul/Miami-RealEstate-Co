@@ -16,7 +16,7 @@ async function ensureInit() {
 
 function ensureAssets() {
   if (heroDataUri && fontData) return;
-  const hero = readFileSync(join(process.cwd(), "hero.jpg"));
+  const hero = readFileSync(join(process.cwd(), "media/page-wallpapers/hero.jpg"));
   heroDataUri = `data:image/jpeg;base64,${hero.toString("base64")}`;
   fontData = new Uint8Array(readFileSync(join(process.cwd(), "fonts/Inter-Bold.ttf")));
 }
