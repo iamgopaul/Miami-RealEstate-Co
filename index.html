@@ -18,7 +18,7 @@
   <title>Revara Realty</title>
 
   <!-- Favicon: Brickell skyline mark -->
-  <link rel="icon" type="image/png" href="media/logo/revara-realty-logo.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="media/logo/favicon.png">
 
   <!-- ─── META PIXEL ─── Replace YOUR_PIXEL_ID with your actual Pixel ID ─── -->
   <script>
@@ -74,11 +74,10 @@
     }
 
     .site-logo-img {
-      height: 130px;
+      height: 150px;
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
-      mix-blend-mode: screen;
       animation: logoImageGlow 3s ease-in-out infinite;
     }
 
@@ -596,8 +595,8 @@
       }
     }
     @keyframes logoImageGlow {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(192,192,192,0.45)) drop-shadow(0 0 22px rgba(192,192,192,0.18)); }
-      50%       { filter: drop-shadow(0 0 16px rgba(220,220,220,0.75)) drop-shadow(0 0 40px rgba(192,192,192,0.32)); }
+      0%, 100% { filter: contrast(1.8) brightness(0.88) drop-shadow(0 0 10px rgba(192,192,192,0.55)) drop-shadow(0 0 26px rgba(192,192,192,0.22)); }
+      50%       { filter: contrast(1.8) brightness(0.88) drop-shadow(0 0 20px rgba(220,220,220,0.90)) drop-shadow(0 0 48px rgba(192,192,192,0.38)); }
     }
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(22px); }
