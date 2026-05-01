@@ -93,7 +93,7 @@ function confirmationHtml(lead: Lead): string {
         <!-- Footer -->
         <tr><td style="background:#f8f9fb;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center;border-top:1px solid #e5e7eb;">
           <p style="margin:0 0 5px;font-size:12px;color:#9ca3af;letter-spacing:0.06em;">
-            Brickell &nbsp;&middot;&nbsp; Miami Beach &nbsp;&middot;&nbsp; Coral Gables &nbsp;&middot;&nbsp; Wynwood &nbsp;&middot;&nbsp; Design District
+            Brickell &nbsp;&middot;&nbsp; Coral Gables &nbsp;&middot;&nbsp; Design District &nbsp;&middot;&nbsp; Wynwood &nbsp;&middot;&nbsp; Miami Beach
           </p>
           <p style="margin:0;font-size:11px;color:#d1d5db;">&copy; 2025 Miami Properties. All rights reserved.</p>
         </td></tr>
