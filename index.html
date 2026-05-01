@@ -173,11 +173,9 @@
     }
 
     .badge {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      flex-wrap: wrap;
       justify-content: center;
-      gap: 6px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
@@ -188,6 +186,11 @@
       letter-spacing: 0.07em;
       text-transform: uppercase;
       margin-bottom: 20px;
+      width: 360px;
+      max-width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .hero h1 {
@@ -776,7 +779,7 @@
           </div>
         </div>
 
-        <div class="badge"><span id="badge-text">Brickell · Coral Gables · Design District</span></div>
+        <div class="badge"><span id="badge-text"></span></div>
 
         <h1>Live Where Miami's Elite<br>Call Home</h1>
         <p class="sub">Private access to off-market listings across Miami's most coveted neighborhoods, with top advisors in your corner from search to close.</p>
@@ -1111,28 +1114,26 @@
 
     // ── BADGE NEIGHBORHOOD CYCLING ───────────────────────────────────────
     (function() {
-      const neighborhoods = [
-        'Brickell', 'Coral Gables', 'Design District',
-        'Wynwood', 'Miami Beach', 'Edgewater',
-        'Coconut Grove', 'South Beach', 'Midtown Miami',
-        'Key Biscayne', 'Aventura', 'Little Havana',
-        'Surfside', 'Bal Harbour', 'Sunny Isles Beach',
-        'Doral', 'Pinecrest', 'South Miami', 'Sweetwater',
+      // Groups hand-balanced for equal visual width
+      const groups = [
+        'Brickell · Coral Gables · Design District',
+        'Wynwood · Miami Beach · Coconut Grove',
+        'South Beach · Midtown Miami · Edgewater',
+        'Key Biscayne · Little Havana · Surfside',
+        'Sunny Isles Beach · Doral · Sweetwater',
+        'Pinecrest · South Miami · Bal Harbour',
       ];
       const el = document.getElementById('badge-text');
       if (!el) return;
-      el.style.transition = 'opacity 1.5s ease';
       let idx = 0;
+      el.textContent = groups[idx++];
+      el.style.transition = 'opacity 1.5s ease';
       function cycle() {
         el.style.opacity = '0';
         setTimeout(() => {
-          el.textContent = [
-            neighborhoods[idx % neighborhoods.length],
-            neighborhoods[(idx + 1) % neighborhoods.length],
-            neighborhoods[(idx + 2) % neighborhoods.length],
-          ].join(' · ');
+          el.textContent = groups[idx % groups.length];
+          idx = (idx + 1) % groups.length;
           el.style.opacity = '1';
-          idx = (idx + 3) % neighborhoods.length;
         }, 1500);
       }
       setInterval(cycle, 8000);
