@@ -9,5 +9,9 @@
     "@resvg/resvg-wasm": "^2.6.2",
     "googleapis": "^144.0.0",
     "resend": "^4.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "@vercel/node": "^5.7.15"
   }
 }
