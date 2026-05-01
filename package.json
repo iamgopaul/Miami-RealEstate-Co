@@ -2,10 +2,11 @@
   "name": "miami-leads",
   "version": "1.0.0",
   "scripts": {
-    "dev":   "bun --watch src/server.ts",
+    "dev": "bun --watch src/server.ts",
     "start": "bun src/server.ts"
   },
   "dependencies": {
+    "@resvg/resvg-wasm": "^2.6.2",
     "googleapis": "^144.0.0",
     "resend": "^4.5.1"
   }

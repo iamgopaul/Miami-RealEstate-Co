@@ -1,6 +1,7 @@
 import { appendLead, type Lead } from "./sheets";
 import { sendConfirmation, sendOwnerAlert } from "./email";
 import { sendTelegramAlert } from "./telegram";
+import { getOgPng } from "./og";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");
@@ -47,6 +48,17 @@ const server = Bun.serve({
     // ── Landing page ──
     if (pathname === "/" && req.method === "GET") {
       return new Response(HTML, { headers: HTML_HEADERS });
+    }
+
+    // ── OG image ──
+    if (pathname === "/og-image.png" && req.method === "GET") {
+      const png = await getOgPng();
+      return new Response(png, {
+        headers: {
+          "Content-Type": "image/png",
+          "Cache-Control": "public, max-age=86400",
+        },
+      });
     }
 
     // ── Static assets (images, favicon, etc.) ──
