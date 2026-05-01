@@ -289,11 +289,65 @@
 
     .field input::placeholder { color: #2e4060; }
 
-    .field-compact select {
-      padding-top: 8px;
-      padding-bottom: 8px;
+    /* ── CUSTOM AREA DROPDOWN ── */
+    .cd { position: relative; }
+    .cd-trigger {
+      width: 100%;
+      padding: 9px 38px 9px 14px;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
       font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: border-color 0.18s, box-shadow 0.18s;
     }
+    .cd-trigger:focus,
+    .cd.open .cd-trigger {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.15);
+    }
+    .cd-trigger svg {
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .cd.open .cd-trigger svg { transform: rotate(180deg); }
+    .cd-list {
+      display: none;
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0; right: 0;
+      max-height: 210px;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      z-index: 300;
+      box-shadow: 0 10px 32px rgba(0,0,0,0.55);
+    }
+    .cd.open .cd-list { display: block; }
+    .cd-group-label {
+      padding: 8px 12px 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .cd-option {
+      padding: 8px 14px;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .cd-option:hover,
+    .cd-option.selected { background: var(--surface-hi); color: #fff; }
 
     .field select option { background: var(--surface); color: var(--text); }
 
@@ -835,67 +889,68 @@
                      placeholder="jane@example.com" required autocomplete="email">
             </div>
 
-            <div class="field field-compact">
-              <label for="area">Preferred Area</label>
-              <select id="area" name="area">
-                <option value="">Select your area</option>
-                <optgroup label="── Miami-Dade ──">
-                  <option value="Miami">Miami</option>
-                  <option value="Brickell">Brickell</option>
-                  <option value="South Beach">South Beach</option>
-                  <option value="Wynwood">Wynwood</option>
-                  <option value="Coral Gables">Coral Gables</option>
-                  <option value="Coconut Grove">Coconut Grove</option>
-                  <option value="Aventura">Aventura</option>
-                  <option value="Sunny Isles Beach">Sunny Isles Beach</option>
-                  <option value="Key Biscayne">Key Biscayne</option>
-                  <option value="Midtown Miami">Midtown Miami</option>
-                  <option value="Edgewater">Edgewater</option>
-                  <option value="Doral">Doral</option>
-                  <option value="Hialeah">Hialeah</option>
-                  <option value="Kendall">Kendall</option>
-                  <option value="Homestead">Homestead</option>
-                  <option value="Pinecrest">Pinecrest</option>
-                </optgroup>
-                <optgroup label="── Broward ──">
-                  <option value="Fort Lauderdale">Fort Lauderdale</option>
-                  <option value="Hollywood">Hollywood</option>
-                  <option value="Hallandale Beach">Hallandale Beach</option>
-                  <option value="Miramar">Miramar</option>
-                  <option value="Pembroke Pines">Pembroke Pines</option>
-                  <option value="Coral Springs">Coral Springs</option>
-                  <option value="Pompano Beach">Pompano Beach</option>
-                  <option value="Deerfield Beach">Deerfield Beach</option>
-                  <option value="Weston">Weston</option>
-                  <option value="Plantation">Plantation</option>
-                  <option value="Davie">Davie</option>
-                </optgroup>
-                <optgroup label="── Palm Beach ──">
-                  <option value="Boca Raton">Boca Raton</option>
-                  <option value="West Palm Beach">West Palm Beach</option>
-                  <option value="Delray Beach">Delray Beach</option>
-                  <option value="Boynton Beach">Boynton Beach</option>
-                  <option value="Palm Beach Gardens">Palm Beach Gardens</option>
-                  <option value="Jupiter">Jupiter</option>
-                  <option value="Wellington">Wellington</option>
-                  <option value="Lake Worth Beach">Lake Worth Beach</option>
-                </optgroup>
-                <optgroup label="── Treasure Coast ──">
-                  <option value="Stuart">Stuart</option>
-                  <option value="Port St. Lucie">Port St. Lucie</option>
-                  <option value="Vero Beach">Vero Beach</option>
-                </optgroup>
-                <optgroup label="── Rest of Florida ──">
-                  <option value="Naples">Naples</option>
-                  <option value="Cape Coral">Cape Coral</option>
-                  <option value="Fort Myers">Fort Myers</option>
-                  <option value="Sarasota">Sarasota</option>
-                  <option value="Tampa">Tampa</option>
-                  <option value="Orlando">Orlando</option>
-                  <option value="Jacksonville">Jacksonville</option>
-                </optgroup>
-                <option value="Other">Other</option>
-              </select>
+            <div class="field">
+              <label>Preferred Area</label>
+              <input type="hidden" id="area" name="area">
+              <div class="cd" id="area-cd">
+                <button type="button" class="cd-trigger" id="area-trigger">
+                  <span id="area-display">Select your area</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b80a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="cd-list" id="area-list">
+                  <div class="cd-group-label">Miami-Dade</div>
+                  <div class="cd-option" data-value="Miami">Miami</div>
+                  <div class="cd-option" data-value="Brickell">Brickell</div>
+                  <div class="cd-option" data-value="South Beach">South Beach</div>
+                  <div class="cd-option" data-value="Wynwood">Wynwood</div>
+                  <div class="cd-option" data-value="Coral Gables">Coral Gables</div>
+                  <div class="cd-option" data-value="Coconut Grove">Coconut Grove</div>
+                  <div class="cd-option" data-value="Aventura">Aventura</div>
+                  <div class="cd-option" data-value="Sunny Isles Beach">Sunny Isles Beach</div>
+                  <div class="cd-option" data-value="Key Biscayne">Key Biscayne</div>
+                  <div class="cd-option" data-value="Midtown Miami">Midtown Miami</div>
+                  <div class="cd-option" data-value="Edgewater">Edgewater</div>
+                  <div class="cd-option" data-value="Doral">Doral</div>
+                  <div class="cd-option" data-value="Hialeah">Hialeah</div>
+                  <div class="cd-option" data-value="Kendall">Kendall</div>
+                  <div class="cd-option" data-value="Homestead">Homestead</div>
+                  <div class="cd-option" data-value="Pinecrest">Pinecrest</div>
+                  <div class="cd-group-label">Broward</div>
+                  <div class="cd-option" data-value="Fort Lauderdale">Fort Lauderdale</div>
+                  <div class="cd-option" data-value="Hollywood">Hollywood</div>
+                  <div class="cd-option" data-value="Hallandale Beach">Hallandale Beach</div>
+                  <div class="cd-option" data-value="Miramar">Miramar</div>
+                  <div class="cd-option" data-value="Pembroke Pines">Pembroke Pines</div>
+                  <div class="cd-option" data-value="Coral Springs">Coral Springs</div>
+                  <div class="cd-option" data-value="Pompano Beach">Pompano Beach</div>
+                  <div class="cd-option" data-value="Deerfield Beach">Deerfield Beach</div>
+                  <div class="cd-option" data-value="Weston">Weston</div>
+                  <div class="cd-option" data-value="Plantation">Plantation</div>
+                  <div class="cd-option" data-value="Davie">Davie</div>
+                  <div class="cd-group-label">Palm Beach</div>
+                  <div class="cd-option" data-value="Boca Raton">Boca Raton</div>
+                  <div class="cd-option" data-value="West Palm Beach">West Palm Beach</div>
+                  <div class="cd-option" data-value="Delray Beach">Delray Beach</div>
+                  <div class="cd-option" data-value="Boynton Beach">Boynton Beach</div>
+                  <div class="cd-option" data-value="Palm Beach Gardens">Palm Beach Gardens</div>
+                  <div class="cd-option" data-value="Jupiter">Jupiter</div>
+                  <div class="cd-option" data-value="Wellington">Wellington</div>
+                  <div class="cd-option" data-value="Lake Worth Beach">Lake Worth Beach</div>
+                  <div class="cd-group-label">Treasure Coast</div>
+                  <div class="cd-option" data-value="Stuart">Stuart</div>
+                  <div class="cd-option" data-value="Port St. Lucie">Port St. Lucie</div>
+                  <div class="cd-option" data-value="Vero Beach">Vero Beach</div>
+                  <div class="cd-group-label">Rest of Florida</div>
+                  <div class="cd-option" data-value="Naples">Naples</div>
+                  <div class="cd-option" data-value="Cape Coral">Cape Coral</div>
+                  <div class="cd-option" data-value="Fort Myers">Fort Myers</div>
+                  <div class="cd-option" data-value="Sarasota">Sarasota</div>
+                  <div class="cd-option" data-value="Tampa">Tampa</div>
+                  <div class="cd-option" data-value="Orlando">Orlando</div>
+                  <div class="cd-option" data-value="Jacksonville">Jacksonville</div>
+                  <div class="cd-option" data-value="Other">Other</div>
+                </div>
+              </div>
             </div>
 
             <div class="field">
@@ -1175,6 +1230,33 @@
         }, 5500);
       }
       setTimeout(show, 10000);
+    })();
+
+    // ── CUSTOM AREA DROPDOWN ─────────────────────────────────────────────
+    (function() {
+      const cd      = document.getElementById('area-cd');
+      const trigger = document.getElementById('area-trigger');
+      const list    = document.getElementById('area-list');
+      const display = document.getElementById('area-display');
+      const hidden  = document.getElementById('area');
+
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        cd.classList.toggle('open');
+      });
+
+      list.addEventListener('click', (e) => {
+        const opt = e.target.closest('.cd-option');
+        if (!opt) return;
+        hidden.value   = opt.dataset.value;
+        display.textContent = opt.textContent;
+        display.style.color = 'var(--text)';
+        list.querySelectorAll('.cd-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        cd.classList.remove('open');
+      });
+
+      document.addEventListener('click', () => cd.classList.remove('open'));
     })();
 
     // ── FORM LABEL HIGHLIGHT ─────────────────────────────────────────────
