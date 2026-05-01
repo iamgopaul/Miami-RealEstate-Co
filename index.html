@@ -173,24 +173,21 @@
     }
 
     .badge {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
-      padding: 6px 14px;
+      padding: 6px 18px;
       border-radius: 999px;
       font-size: clamp(10px, 2.5vw, 12px);
       font-weight: 700;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 20px;
-      width: 360px;
-      max-width: 100%;
-      text-align: center;
       white-space: nowrap;
-      overflow: hidden;
+      transition: width 0.6s ease;
     }
 
     .hero h1 {
@@ -954,27 +951,53 @@
             </div>
 
             <div class="field">
-              <label for="budget">Budget Range</label>
-              <select id="budget" name="budget">
-                <option value="">Select your budget</option>
-                <option value="Under $300K">Under $300,000</option>
-                <option value="$300K–$500K">$300,000 – $500,000</option>
-                <option value="$500K–$750K">$500,000 – $750,000</option>
-                <option value="$750K–$1M">$750,000 – $1,000,000</option>
-                <option value="$1M–$2M">$1M – $2M</option>
-                <option value="$2M+">$2M+</option>
-              </select>
+              <label>Budget Range</label>
+              <input type="hidden" id="budget" name="budget">
+              <div class="cd" id="budget-cd">
+                <button type="button" class="cd-trigger" id="budget-trigger">
+                  <span id="budget-display">Select your budget</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b80a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="cd-list" id="budget-list">
+                  <div class="cd-group-label">Starter</div>
+                  <div class="cd-option" data-value="Under $150K">Under $150,000</div>
+                  <div class="cd-option" data-value="$150K–$250K">$150,000 – $250,000</div>
+                  <div class="cd-option" data-value="$250K–$350K">$250,000 – $350,000</div>
+                  <div class="cd-group-label">Mid-Range</div>
+                  <div class="cd-option" data-value="$350K–$500K">$350,000 – $500,000</div>
+                  <div class="cd-option" data-value="$500K–$650K">$500,000 – $650,000</div>
+                  <div class="cd-option" data-value="$650K–$850K">$650,000 – $850,000</div>
+                  <div class="cd-option" data-value="$850K–$1.2M">$850,000 – $1,200,000</div>
+                  <div class="cd-group-label">Luxury</div>
+                  <div class="cd-option" data-value="$1.2M–$1.8M">$1,200,000 – $1,800,000</div>
+                  <div class="cd-option" data-value="$1.8M–$2.5M">$1,800,000 – $2,500,000</div>
+                  <div class="cd-option" data-value="$2.5M–$4M">$2,500,000 – $4,000,000</div>
+                  <div class="cd-group-label">Ultra-Luxury</div>
+                  <div class="cd-option" data-value="$4M–$7M">$4,000,000 – $7,000,000</div>
+                  <div class="cd-option" data-value="$7M–$10M">$7,000,000 – $10,000,000</div>
+                  <div class="cd-option" data-value="$10M+">$10,000,000+</div>
+                </div>
+              </div>
             </div>
 
             <div class="field">
-              <label for="timeline">When are you looking to buy?</label>
-              <select id="timeline" name="timeline">
-                <option value="">Select timeline</option>
-                <option value="ASAP">ASAP</option>
-                <option value="1–3 Months">1–3 Months</option>
-                <option value="3–6 Months">3–6 Months</option>
-                <option value="Just Browsing">Just Browsing</option>
-              </select>
+              <label>Purchase Timeline</label>
+              <input type="hidden" id="timeline" name="timeline">
+              <div class="cd" id="timeline-cd">
+                <button type="button" class="cd-trigger" id="timeline-trigger">
+                  <span id="timeline-display">Select your timeline</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6b80a8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+                <div class="cd-list" id="timeline-list">
+                  <div class="cd-option" data-value="Immediately">Immediately — Ready to move now</div>
+                  <div class="cd-option" data-value="1–3 Months">1 – 3 Months</div>
+                  <div class="cd-option" data-value="3–6 Months">3 – 6 Months</div>
+                  <div class="cd-option" data-value="6–12 Months">6 – 12 Months</div>
+                  <div class="cd-option" data-value="1–2 Years">1 – 2 Years</div>
+                  <div class="cd-option" data-value="2+ Years">2+ Years — Planning ahead</div>
+                  <div class="cd-option" data-value="Just Exploring">Just Exploring Options</div>
+                </div>
+              </div>
             </div>
 
             <button type="submit" class="btn-submit" id="submit-btn">
@@ -1232,31 +1255,39 @@
       setTimeout(show, 10000);
     })();
 
-    // ── CUSTOM AREA DROPDOWN ─────────────────────────────────────────────
+    // ── CUSTOM DROPDOWNS ─────────────────────────────────────────────────
     (function() {
-      const cd      = document.getElementById('area-cd');
-      const trigger = document.getElementById('area-trigger');
-      const list    = document.getElementById('area-list');
-      const display = document.getElementById('area-display');
-      const hidden  = document.getElementById('area');
+      function initDropdown(cdId, triggerId, listId, displayId, hiddenId) {
+        const cd      = document.getElementById(cdId);
+        const trigger = document.getElementById(triggerId);
+        const list    = document.getElementById(listId);
+        const display = document.getElementById(displayId);
+        const hidden  = document.getElementById(hiddenId);
+        if (!cd) return;
 
-      trigger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        cd.classList.toggle('open');
-      });
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.cd.open').forEach(o => { if (o !== cd) o.classList.remove('open'); });
+          cd.classList.toggle('open');
+        });
 
-      list.addEventListener('click', (e) => {
-        const opt = e.target.closest('.cd-option');
-        if (!opt) return;
-        hidden.value   = opt.dataset.value;
-        display.textContent = opt.textContent;
-        display.style.color = 'var(--text)';
-        list.querySelectorAll('.cd-option').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        cd.classList.remove('open');
-      });
+        list.addEventListener('click', (e) => {
+          const opt = e.target.closest('.cd-option');
+          if (!opt) return;
+          hidden.value        = opt.dataset.value;
+          display.textContent = opt.textContent;
+          display.style.color = 'var(--text)';
+          list.querySelectorAll('.cd-option').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          cd.classList.remove('open');
+        });
+      }
 
-      document.addEventListener('click', () => cd.classList.remove('open'));
+      initDropdown('area-cd',     'area-trigger',     'area-list',     'area-display',     'area');
+      initDropdown('budget-cd',   'budget-trigger',   'budget-list',   'budget-display',   'budget');
+      initDropdown('timeline-cd', 'timeline-trigger', 'timeline-list', 'timeline-display', 'timeline');
+
+      document.addEventListener('click', () => document.querySelectorAll('.cd.open').forEach(o => o.classList.remove('open')));
     })();
 
     // ── FORM LABEL HIGHLIGHT ─────────────────────────────────────────────
@@ -1278,7 +1309,8 @@
         'Pompano Beach','Deerfield Beach','Weston','Plantation','Davie',
         'Boca Raton','West Palm Beach','Delray Beach','Boynton Beach',
         'Palm Beach Gardens','Jupiter','Wellington','Lake Worth Beach',
-        'Stuart','Port St. Lucie','Naples','Sarasota','Tampa','Orlando',
+        'Stuart','Port St. Lucie','Vero Beach','Naples','Cape Coral',
+        'Fort Myers','Sarasota','Tampa','Orlando','Jacksonville',
       ];
       function shuffle(arr) {
         const a = [...arr];
@@ -1290,21 +1322,22 @@
       }
       let deck = shuffle(allAreas);
       let pos  = 0;
-      function nextGroup() {
-        if (pos + 3 > deck.length) { deck = shuffle(allAreas); pos = 0; }
-        const trio = deck.slice(pos, pos + 3);
-        pos += 3;
-        return trio.join(' · ');
+      function next() {
+        if (pos >= deck.length) { deck = shuffle(allAreas); pos = 0; }
+        return deck[pos++];
       }
       const el = document.getElementById('badge-text');
       if (!el) return;
-      el.textContent = nextGroup();
-      el.style.transition = 'opacity 1.5s ease';
+      el.textContent = next();
+      el.style.transition = 'opacity 0.6s ease';
       function cycle() {
         el.style.opacity = '0';
-        setTimeout(() => { el.textContent = nextGroup(); el.style.opacity = '1'; }, 1500);
+        setTimeout(() => {
+          el.textContent = next();
+          el.style.opacity = '1';
+        }, 600);
       }
-      setInterval(cycle, 8000);
+      setInterval(cycle, 3500);
     })();
 
   </script>

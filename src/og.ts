@@ -64,12 +64,12 @@ function buildSvg(heroUri: string): string {
   <text x="600" y="472"
     font-family="Arial, Helvetica, sans-serif"
     font-size="20" fill="rgba(255,255,255,0.72)"
-    text-anchor="middle" letter-spacing="9">LUXURY REAL ESTATE</text>
+    text-anchor="middle" letter-spacing="9">SOUTH FLORIDA REAL ESTATE</text>
 
   <text x="600" y="580"
     font-family="Arial, Helvetica, sans-serif"
     font-size="15" fill="rgba(255,255,255,0.45)"
-    text-anchor="middle" letter-spacing="2">BRICKELL · CORAL GABLES · DESIGN DISTRICT · WYNWOOD · MIAMI BEACH</text>
+    text-anchor="middle" letter-spacing="2">MIAMI · FORT LAUDERDALE · BOCA RATON · WEST PALM BEACH</text>
 
   <rect x="0" y="625" width="1200" height="5" fill="#FF6B35"/>
 </svg>`;
