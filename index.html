@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="description" content="Private access to off-market luxury properties in Brickell, Miami Beach, and Coral Gables. Work with Miami's top real estate advisors.">
   <meta property="og:title" content="Miami Properties — Luxury Real Estate in Brickell & Miami Beach">
   <meta property="og:description" content="Private access to off-market listings across Miami's most coveted neighborhoods.">
@@ -61,7 +61,7 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      margin-bottom: 44px;
+      margin-bottom: 36px;
     }
 
     .site-logo svg { flex-shrink: 0; }
@@ -73,7 +73,7 @@
     }
 
     .site-logo-name {
-      font-size: 18px;
+      font-size: clamp(14px, 3.5vw, 18px);
       font-weight: 800;
       color: #fff;
       letter-spacing: 0.14em;
@@ -98,7 +98,7 @@
       min-height: 100svh;
       display: flex;
       align-items: center;
-      padding: 56px 20px 96px;
+      padding: clamp(40px, 8vw, 72px) clamp(16px, 5vw, 40px) clamp(72px, 10vw, 96px);
       background-image:
         linear-gradient(
           160deg,
@@ -112,6 +112,11 @@
       overflow: hidden;
     }
 
+    /* Landscape phones: don't lock them to full screen height */
+    @media (max-height: 520px) and (orientation: landscape) {
+      .hero { min-height: auto; padding: 40px clamp(16px, 5vw, 40px) 60px; }
+    }
+
     /* Cinematic bottom fade into the dark page */
     .hero::after {
       content: '';
@@ -123,29 +128,57 @@
       z-index: 1;
     }
 
+    /* ── Hero inner: single column on mobile, side-by-side on large screens ── */
     .hero-inner {
       position: relative;
       z-index: 1;
       width: 100%;
-      max-width: 560px;
+      max-width: 1140px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
       text-align: center;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 540px;
+    }
+
+    @media (min-width: 900px) {
+      .hero-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: clamp(40px, 6vw, 80px);
+        text-align: left;
+      }
+      .hero-content {
+        flex: 1;
+        max-width: none;
+      }
+      .site-logo { justify-content: flex-start; }
+      .badge     { align-self: flex-start; }
+      .form-card { width: 420px; flex-shrink: 0; }
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 6px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
-      padding: 6px 16px;
+      padding: 6px 14px;
       border-radius: 999px;
-      font-size: 12px;
+      font-size: clamp(10px, 2.5vw, 12px);
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .hero h1 {
@@ -173,7 +206,7 @@
       background: var(--surface-hi);
       border: 1px solid var(--border);
       border-radius: 18px;
-      padding: 28px 22px 22px;
+      padding: clamp(18px, 4vw, 28px) clamp(14px, 4vw, 22px) clamp(16px, 3vw, 22px);
       box-shadow: 0 24px 64px rgba(0,0,0,0.55);
       text-align: left;
     }
@@ -182,17 +215,22 @@
       font-size: 17px;
       font-weight: 700;
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       color: var(--text);
     }
 
-    .field { margin-bottom: 13px; }
+    .field { margin-bottom: 12px; }
 
     .field-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-bottom: 13px;
+      margin-bottom: 12px;
+    }
+
+    /* Collapse city/zip to single column on very narrow screens */
+    @media (max-width: 360px) {
+      .field-row { grid-template-columns: 1fr; }
     }
 
     .field-row .field { margin-bottom: 0; }
@@ -213,7 +251,7 @@
       padding: 13px 14px;
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      font-size: 15px;
+      font-size: 16px; /* 16px prevents iOS Safari from auto-zooming */
       color: var(--text);
       background: var(--surface);
       transition: border-color 0.18s, box-shadow 0.18s;
@@ -294,15 +332,17 @@
       color: var(--blue);
       text-align: center;
       padding: 15px 20px;
-      font-size: 14px;
+      font-size: clamp(12px, 3vw, 14px);
       font-weight: 600;
       letter-spacing: 0.02em;
+      line-height: 1.75;
+      word-break: break-word;
     }
 
     /* ── BENEFITS ── */
     .benefits {
       background: var(--light);
-      padding: 72px 20px;
+      padding: clamp(48px, 8vw, 72px) clamp(16px, 5vw, 40px);
       text-align: center;
     }
 
@@ -345,7 +385,7 @@
 
     /* ── FINAL CTA ── */
     .final-cta {
-      padding: 72px 20px;
+      padding: clamp(48px, 8vw, 72px) clamp(16px, 5vw, 40px);
       text-align: center;
       background: var(--bg);
     }
@@ -371,11 +411,15 @@
       border: none;
       padding: 18px 52px;
       border-radius: 999px;
-      font-size: 18px;
+      font-size: clamp(16px, 4vw, 18px);
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       transition: background 0.18s, transform 0.1s;
+    }
+
+    @media (max-width: 480px) {
+      .btn-cta-lg { display: block; padding: 18px 24px; }
     }
 
     .btn-cta-lg:hover  { background: var(--orange-dark); }
@@ -389,7 +433,8 @@
         display: block;
         position: fixed;
         bottom: 0; left: 0; right: 0;
-        padding: 10px 16px 14px;
+        /* env() gives correct inset on iPhone X+ / Android w/ gesture nav */
+        padding: 10px 16px calc(14px + env(safe-area-inset-bottom));
         background: var(--surface-hi);
         border-top: 1px solid var(--border);
         box-shadow: 0 -3px 24px rgba(0,0,0,0.5);
@@ -402,14 +447,16 @@
         background: var(--orange);
         color: #fff;
         border: none;
+        /* 48px touch target (Apple HIG / Material minimum) */
         padding: 15px;
+        min-height: 48px;
         border-radius: var(--radius);
         font-size: 16px;
         font-weight: 700;
         cursor: pointer;
       }
 
-      body { padding-bottom: 76px; }
+      body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
     }
 
     /* ── FOOTER ── */
@@ -587,30 +634,35 @@
 
     <div class="hero-inner">
 
-      <!-- Page logo -->
-      <div class="site-logo">
-        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Miami Properties logo mark">
-          <!-- Skyline mark -->
-          <rect x="1"  y="25" width="5"  height="10" rx="1"   fill="#FF6B35"/>
-          <rect x="7"  y="18" width="5"  height="17" rx="1"   fill="#FF6B35"/>
-          <rect x="14" y="10" width="7"  height="25" rx="1"   fill="#FF6B35"/>
-          <rect x="22" y="15" width="5"  height="20" rx="1"   fill="#FF6B35" opacity="0.85"/>
-          <rect x="28" y="21" width="5"  height="14" rx="1"   fill="#FF6B35" opacity="0.65"/>
-          <!-- Ground line -->
-          <rect x="0"  y="35" width="36" height="1"            fill="#FF6B35" opacity="0.35"/>
-        </svg>
-        <div class="site-logo-text">
-          <span class="site-logo-name">MIAMI <span>PROPERTIES</span></span>
-          <span class="site-logo-tagline">Luxury Real Estate</span>
+      <!-- Text content (left on desktop, centered on mobile) -->
+      <div class="hero-content">
+
+        <!-- Page logo -->
+        <div class="site-logo">
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Miami Properties logo mark">
+            <!-- Skyline mark -->
+            <rect x="1"  y="25" width="5"  height="10" rx="1"   fill="#FF6B35"/>
+            <rect x="7"  y="18" width="5"  height="17" rx="1"   fill="#FF6B35"/>
+            <rect x="14" y="10" width="7"  height="25" rx="1"   fill="#FF6B35"/>
+            <rect x="22" y="15" width="5"  height="20" rx="1"   fill="#FF6B35" opacity="0.85"/>
+            <rect x="28" y="21" width="5"  height="14" rx="1"   fill="#FF6B35" opacity="0.65"/>
+            <!-- Ground line -->
+            <rect x="0"  y="35" width="36" height="1"            fill="#FF6B35" opacity="0.35"/>
+          </svg>
+          <div class="site-logo-text">
+            <span class="site-logo-name">MIAMI <span>PROPERTIES</span></span>
+            <span class="site-logo-tagline">Luxury Real Estate</span>
+          </div>
         </div>
-      </div>
 
-      <div class="badge">Brickell &nbsp;·&nbsp; Miami Beach &nbsp;·&nbsp; Coral Gables</div>
+        <div class="badge">Brickell &nbsp;·&nbsp; Miami Beach &nbsp;·&nbsp; Coral Gables</div>
 
-      <h1>Live Where Miami's Elite<br>Call Home</h1>
-      <p class="sub">Private access to off-market listings across Miami's most coveted neighborhoods, with top advisors in your corner from search to close.</p>
+        <h1>Live Where Miami's Elite<br>Call Home</h1>
+        <p class="sub">Private access to off-market listings across Miami's most coveted neighborhoods, with top advisors in your corner from search to close.</p>
 
-      <!-- LEAD FORM -->
+      </div><!-- /hero-content -->
+
+      <!-- LEAD FORM (right column on desktop) -->
       <div class="form-card" id="form-card">
 
         <h2>Request Your Private Listings</h2>

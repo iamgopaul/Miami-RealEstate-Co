@@ -12,37 +12,39 @@ export interface Lead {
   source:    string;
 }
 
-// Column headers — row 1 of your Google Sheet must match this order
-const HEADERS = ["Timestamp", "Name", "Email", "Phone", "City", "Zip", "Budget", "Timeline", "Source"];
+const HEADERS    = ["Timestamp", "Name", "Email", "Phone", "City", "Zip", "Budget", "Timeline", "Source"];
+const SHEET_NAME = process.env.GOOGLE_SHEET_NAME ?? "Leads";
 
-const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID!;
-const SHEET_NAME     = process.env.GOOGLE_SHEET_NAME ?? "Leads";
+function sheetsClient() {
+  const sheetId = process.env.GOOGLE_SHEET_ID;
+  const email   = process.env.GOOGLE_CLIENT_EMAIL;
+  const key     = process.env.GOOGLE_PRIVATE_KEY;
+  if (!sheetId || !email || !key) return null;
 
-const auth = new google.auth.GoogleAuth({
-  credentials: {
-    client_email: process.env.GOOGLE_CLIENT_EMAIL,
-    private_key:  process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-  },
-  scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-});
-
-const sheets = google.sheets({ version: "v4", auth });
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: email,
+      private_key:  key.replace(/\\n/g, "\n"),
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+  return { api: google.sheets({ version: "v4", auth }), sheetId };
+}
 
 export async function appendLead(lead: Lead): Promise<void> {
+  const client = sheetsClient();
+  if (!client) {
+    console.warn("Google Sheets not configured — skipping sheet append");
+    return;
+  }
+
   const row = [
-    lead.timestamp,
-    lead.name,
-    lead.email,
-    lead.phone,
-    lead.city,
-    lead.zip,
-    lead.budget,
-    lead.timeline,
-    lead.source,
+    lead.timestamp, lead.name, lead.email, lead.phone,
+    lead.city, lead.zip, lead.budget, lead.timeline, lead.source,
   ];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId:    SPREADSHEET_ID,
+  await client.api.spreadsheets.values.append({
+    spreadsheetId:    client.sheetId,
     range:            `${SHEET_NAME}!A:${colLetter(HEADERS.length)}`,
     valueInputOption: "RAW",
     insertDataOption: "INSERT_ROWS",

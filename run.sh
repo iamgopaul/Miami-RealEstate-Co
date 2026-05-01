@@ -31,25 +31,16 @@ bun install --frozen-lockfile
 if [ ! -f .env ]; then
   cp .env.example .env
   warn ".env created from .env.example"
-  warn "Open .env and fill in GOOGLE_SHEET_ID, GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY"
+  warn "Open .env and fill in your credentials, then re-run this script."
   warn "Then re-run this script."
   echo ""
   exit 0
 fi
 
-# ── 4. Check required env vars ───────────────────────────────────────────
-source .env
-MISSING=()
-[ -z "${GOOGLE_SHEET_ID:-}"      ] && MISSING+=("GOOGLE_SHEET_ID")
-[ -z "${GOOGLE_CLIENT_EMAIL:-}"  ] && MISSING+=("GOOGLE_CLIENT_EMAIL")
-[ -z "${GOOGLE_PRIVATE_KEY:-}"   ] && MISSING+=("GOOGLE_PRIVATE_KEY")
-
-if [ ${#MISSING[@]} -gt 0 ]; then
-  warn "Missing values in .env:"
-  for v in "${MISSING[@]}"; do echo "    • $v"; done
-  warn "Google Sheets integration will log leads to console until these are set."
-  echo ""
-fi
+# ── 4. Read PORT ─────────────────────────────────────────────────────────
+# Parse with grep — never source .env so shell metacharacters can't break this
+_env() { grep -E "^${1}=" .env 2>/dev/null | head -1 | cut -d'=' -f2- | tr -d '"' | tr -d "'"; }
+PORT="$(_env PORT)"
 
 # ── 5. Free the port if something is already using it ────────────────────
 PORT="${PORT:-3000}"

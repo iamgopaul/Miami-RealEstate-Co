@@ -1,6 +1,6 @@
 import { appendLead, type Lead } from "./sheets";
 import { sendConfirmation, sendOwnerAlert } from "./email";
-import { sendWhatsAppAlert } from "./whatsapp";
+import { sendTelegramAlert } from "./telegram";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");
@@ -98,10 +98,10 @@ const server = Bun.serve({
       Promise.allSettled([
         sendConfirmation(lead),
         sendOwnerAlert(lead),
-        sendWhatsAppAlert(lead),
+        sendTelegramAlert(lead),
       ]).then(results => {
         results.forEach((r, i) => {
-          const label = ["confirmation email", "owner alert", "whatsapp"][i];
+          const label = ["confirmation email", "owner alert", "telegram"][i];
           if (r.status === "rejected") console.error(`${label} failed:`, r.reason);
         });
       });
