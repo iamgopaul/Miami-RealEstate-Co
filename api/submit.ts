@@ -2,7 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { appendLead, type Lead } from "../src/sheets.js";
 import { sendConfirmation, sendOwnerAlert } from "../src/email.js";
 import { sendTelegramAlert } from "../src/telegram.js";
-import { generateLeadId } from "../src/utils.js";
+import { generateLeadId, validateSubmission } from "../src/utils.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ ok: false });
@@ -14,6 +14,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (!name || !phone || !email) {
     return res.status(400).json({ ok: false, error: "name, phone, and email are required" });
+  }
+
+  const invalid = validateSubmission(name, phone, email);
+  if (invalid.length) {
+    return res.status(400).json({ ok: false, error: "invalid_fields", fields: invalid });
   }
 
   const lead: Lead = {

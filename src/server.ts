@@ -1,7 +1,7 @@
 import { appendLead, type Lead } from "./sheets.js";
 import { sendConfirmation, sendOwnerAlert } from "./email.js";
 import { sendTelegramAlert } from "./telegram.js";
-import { generateLeadId } from "./utils.js";
+import { generateLeadId, validateSubmission } from "./utils.js";
 import { getOgPng } from "./og-image.js";
 import { join } from "path";
 
@@ -102,6 +102,11 @@ const server = Bun.serve({
 
       if (!name || !phone || !email) {
         return json({ ok: false, error: "name, phone, and email are required" }, 400);
+      }
+
+      const invalid = validateSubmission(name, phone, email);
+      if (invalid.length) {
+        return json({ ok: false, error: "invalid_fields", fields: invalid }, 400);
       }
 
       const lead: Lead = {
