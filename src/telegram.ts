@@ -31,18 +31,21 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
     `<i>${esc(time)} EST</i>`,
   ].join("\n");
 
-  const res = await fetch(
-    `https://api.telegram.org/bot${token}/sendMessage`,
-    {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: chatId, text, parse_mode: "HTML" }),
-    }
-  );
+  const chatIds = chatId.split(",").map(id => id.trim()).filter(Boolean);
 
-  if (!res.ok) {
-    const body = await res.text();
-    throw new Error(`Telegram error ${res.status}: ${body}`);
-  }
+  await Promise.all(chatIds.map(async id => {
+    const res = await fetch(
+      `https://api.telegram.org/bot${token}/sendMessage`,
+      {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: id, text, parse_mode: "HTML" }),
+      }
+    );
+    if (!res.ok) {
+      const body = await res.text();
+      throw new Error(`Telegram error ${res.status} for chat ${id}: ${body}`);
+    }
+  }));
 }
 
