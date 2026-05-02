@@ -1,5 +1,6 @@
 {
   "framework": null,
+  "outputDirectory": ".",
   "buildCommand": "node scripts/build.js",
   "rewrites": [
     { "source": "/submit",       "destination": "/api/submit"    },
