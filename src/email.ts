@@ -1,6 +1,6 @@
 import { Resend } from "resend";
-import type { Lead } from "./sheets";
-import { esc } from "./utils";
+import type { Lead } from "./sheets.js";
+import { esc } from "./utils.js";
 
 function client(): Resend | null {
   const key = process.env.RESEND_API_KEY;

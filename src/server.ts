@@ -1,7 +1,7 @@
-import { appendLead, type Lead } from "./sheets";
-import { sendConfirmation, sendOwnerAlert } from "./email";
-import { sendTelegramAlert } from "./telegram";
-import { getOgPng } from "./og-image";
+import { appendLead, type Lead } from "./sheets.js";
+import { sendConfirmation, sendOwnerAlert } from "./email.js";
+import { sendTelegramAlert } from "./telegram.js";
+import { getOgPng } from "./og-image.js";
 import { join } from "path";
 
 const ROOT = join(import.meta.dir, "..");

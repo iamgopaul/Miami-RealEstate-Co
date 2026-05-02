@@ -1,5 +1,5 @@
-import type { Lead } from "./sheets";
-import { esc } from "./utils";
+import type { Lead } from "./sheets.js";
+import { esc } from "./utils.js";
 
 export async function sendTelegramAlert(lead: Lead): Promise<void> {
   const token  = process.env.TELEGRAM_BOT_TOKEN;
