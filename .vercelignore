@@ -1,1 +1,9 @@
-src/server.ts
+src/
+scripts/
+api/
+.env
+.env.example
+package.json
+package-lock.json
+tsconfig.json
+bun.lockb

@@ -4,8 +4,27 @@ import { sendConfirmation, sendOwnerAlert } from "../src/email.js";
 import { sendTelegramAlert } from "../src/telegram.js";
 import { generateLeadId, validateSubmission } from "../src/utils.js";
 
+// Simple in-memory rate limit: max 3 submissions per IP per 10 minutes
+const rateMap = new Map<string, { count: number; reset: number }>();
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now > entry.reset) {
+    rateMap.set(ip, { count: 1, reset: now + 10 * 60 * 1000 });
+    return false;
+  }
+  if (entry.count >= 3) return true;
+  entry.count++;
+  return false;
+}
+
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ ok: false });
+
+  const ip = (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ?? "unknown";
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ ok: false, error: "Too many requests. Please try again later." });
+  }
 
   const body = req.body as Partial<Lead>;
   const name  = body.name?.trim();

@@ -4,23 +4,22 @@ import { Resend } from "resend";
 
 const FROM  = process.env.RESEND_FROM    ?? "Revara Realty · No Reply <team@revararealty.com>";
 const OWNER = process.env.OWNER_EMAIL    ?? "revara.realty@outlook.com";
-const SECRET = process.env.RESEND_WEBHOOK_SECRET ?? "";
+const SECRET = process.env.RESEND_WEBHOOK_SECRET;
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ ok: false });
 
-  // Verify the request is from Resend
-  if (SECRET) {
-    try {
-      const wh = new Webhook(SECRET);
-      wh.verify(JSON.stringify(req.body), {
-        "svix-id":        req.headers["svix-id"] as string,
-        "svix-timestamp": req.headers["svix-timestamp"] as string,
-        "svix-signature": req.headers["svix-signature"] as string,
-      });
-    } catch {
-      return res.status(401).json({ ok: false, error: "Invalid signature" });
-    }
+  // Verify the request is from Resend — reject if secret is not configured
+  if (!SECRET) return res.status(500).json({ ok: false, error: "Webhook secret not configured" });
+  try {
+    const wh = new Webhook(SECRET);
+    wh.verify(JSON.stringify(req.body), {
+      "svix-id":        req.headers["svix-id"] as string,
+      "svix-timestamp": req.headers["svix-timestamp"] as string,
+      "svix-signature": req.headers["svix-signature"] as string,
+    });
+  } catch {
+    return res.status(401).json({ ok: false, error: "Invalid signature" });
   }
 
   const { type, data } = req.body as { type: string; data: { from?: string; subject?: string } };
@@ -35,7 +34,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     to:      data.from,
     replyTo: OWNER,
     subject: "Your message was not received — Revara Realty",
-    html:    autoReplyHtml(data.subject ?? "(no subject)"),
+    html:    autoReplyHtml((data.subject ?? "(no subject)").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")),
   });
 
   return res.json({ ok: true });
