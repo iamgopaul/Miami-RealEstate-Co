@@ -7,8 +7,8 @@ function client(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
-const FROM  = process.env.RESEND_FROM  ?? "Revara Realty <team@revararealty.com>";
-const OWNER = process.env.OWNER_EMAIL  ?? "joshgopaul91@gmail.com";
+const FROM  = process.env.RESEND_FROM  ?? "Revara Realty <revera.realty@outlook.com>";
+const OWNER = process.env.OWNER_EMAIL  ?? "revera.realty@outlook.com";
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
