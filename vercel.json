@@ -3,9 +3,8 @@
   "outputDirectory": ".",
   "buildCommand": "node scripts/build.js",
   "rewrites": [
-    { "source": "/submit",       "destination": "/api/submit"    },
-    { "source": "/og-image.png", "destination": "/api/og-image"  },
-    { "source": "/",             "destination": "/index.html"    }
+    { "source": "/submit",       "destination": "/api/submit"   },
+    { "source": "/og-image.png", "destination": "/api/og-image" }
   ],
   "functions": {
     "api/og-image.ts": {
