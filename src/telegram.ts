@@ -15,21 +15,21 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
 
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ") || "—";
 
+  const row = (label: string, value: string) =>
+    `<b>${label}</b>\n${value}`;
+
   const text = [
-    `<b>— REVARA REALTY —</b>`,
-    `<i>South Florida Luxury Real Estate</i>`,
+    `🏙 <b>REVARA REALTY</b>`,
+    `<i>New Inquiry — ${esc(time)} EST</i>`,
     ``,
-    `<b>New Inquiry Received</b>`,
-    `<code>─────────────────────</code>`,
-    `<b>RRID</b>       <code>${esc(lead.id)}</code>`,
-    `<b>Name</b>       ${esc(lead.name)}`,
-    `<b>Email</b>      <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`,
-    `<b>Phone</b>      <a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>`,
-    `<b>Location</b>   ${esc(location)}`,
-    `<b>Budget</b>     ${esc(lead.budget)}`,
-    `<b>Timeline</b>   ${esc(lead.timeline)}`,
-    `<code>─────────────────────</code>`,
-    `<i>${esc(time)} EST</i>`,
+    `🪪 <b>Reference</b>\n<code>${esc(lead.id)}</code>`,
+    ``,
+    row(`👤 Name`,     esc(lead.name)),
+    row(`📧 Email`,    `<a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`),
+    row(`📞 Phone`,    `<a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>`),
+    row(`📍 Location`, esc(location)),
+    row(`💰 Budget`,   esc(lead.budget)),
+    row(`🗓 Timeline`, esc(lead.timeline)),
   ].join("\n");
 
   const chatIds = chatId.split(",").map(id => id.trim()).filter(Boolean);
