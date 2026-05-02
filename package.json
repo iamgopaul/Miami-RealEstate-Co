@@ -1,6 +1,7 @@
 {
   "name": "revara-realty",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "bun --watch src/server.ts"
   },

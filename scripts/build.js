@@ -1,4 +1,4 @@
-const fs = require("fs");
+import { readFileSync, writeFileSync } from "fs";
 
 const url = (process.env.SITE_URL ?? "").replace(/\/$/, "");
 if (!url) {
@@ -6,7 +6,7 @@ if (!url) {
   process.exit(1);
 }
 
-let html = fs.readFileSync("index.html", "utf8");
+let html = readFileSync("index.html", "utf8");
 html = html.replaceAll("__SITE_URL__", url);
-fs.writeFileSync("index.html", html);
+writeFileSync("index.html", html);
 console.log(`build: replaced __SITE_URL__ → ${url}`);
