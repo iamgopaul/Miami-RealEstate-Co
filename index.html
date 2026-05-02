@@ -62,6 +62,7 @@
       background: var(--bg);
       font-size: 16px;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     /* ── SITE LOGO ── */
@@ -128,7 +129,6 @@
         url('media/page-wallpapers/hero.jpg');
       background-size: cover;
       background-position: center 18%;
-      overflow: hidden;
     }
 
     /* Landscape phones: don't lock them to full screen height */
@@ -689,22 +689,22 @@
     .hero:hover #cursor-glow { opacity: 1; }
 
     /* ── FORM CARD SHIMMER ───────────────────────────────────────────────── */
-    .form-card { position: relative; overflow: hidden; }
+    .form-card { position: relative; }
     .form-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 45%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.035), transparent);
-      transform: translateX(-100%) skewX(-15deg);
+      inset: 0;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.035) 50%, transparent 70%);
+      background-size: 300% 100%;
+      background-position: -100% 0;
       animation: shimmerSweep 7s ease-in-out infinite;
       pointer-events: none;
       z-index: 0;
+      border-radius: inherit;
     }
     @keyframes shimmerSweep {
-      0%   { transform: translateX(-100%) skewX(-15deg); }
-      40%, 100% { transform: translateX(350%) skewX(-15deg); }
+      0%   { background-position: -100% 0; }
+      40%, 100% { background-position: 250% 0; }
     }
 
     /* ── BUTTON RIPPLE ───────────────────────────────────────────────────── */
