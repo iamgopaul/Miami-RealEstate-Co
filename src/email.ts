@@ -110,10 +110,16 @@ function confirmationHtml(lead: Lead): string {
               <p style="margin:0 0 10px;font-size:16px;font-weight:700;letter-spacing:0.03em;color:#0a0a0a;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
                 ${esc(lead.id)}
               </p>
-              <p style="margin:0;font-size:12px;color:#777777;line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                This is your unique reference number. When contacting us, please use the subject line:<br>
-                <strong style="color:#444444;">${esc(lead.name)} | ${esc(lead.id)}</strong>
+              <p style="margin:0 0 8px;font-size:12px;color:#777777;line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                This is your unique reference number. When contacting us, please use the subject line:
               </p>
+              <table cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td nowrap style="font-size:11px;font-weight:700;color:#444444;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                    ${esc(lead.name)}&nbsp;|&nbsp;${esc(lead.id)}
+                  </td>
+                </tr>
+              </table>
             </td></tr>
           </table>
 
