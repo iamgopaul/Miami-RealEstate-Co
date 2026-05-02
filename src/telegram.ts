@@ -45,7 +45,11 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
     );
     if (!res.ok) {
       const body = await res.text();
-      throw new Error(`Telegram error ${res.status} for chat ${id}: ${body}`);
+      const parsed = JSON.parse(body);
+      const hint = parsed?.description?.includes("chat not found")
+        ? ` — user ${id} must open the bot on Telegram and press Start before messages can be delivered.`
+        : "";
+      throw new Error(`Telegram error ${res.status} for chat ${id}${hint}`);
     }
   }));
 
