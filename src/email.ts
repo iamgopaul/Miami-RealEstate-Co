@@ -7,7 +7,7 @@ function client(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
-const FROM     = process.env.RESEND_FROM   ?? "Revara Realty <team@revararealty.com>";
+const FROM     = process.env.RESEND_FROM   ?? "Revara Realty · No Reply <team@revararealty.com>";
 const OWNER    = process.env.OWNER_EMAIL   ?? "revara.realty@outlook.com";
 const REPLY_TO = process.env.REPLY_TO      ?? "revara.realty@outlook.com";
 

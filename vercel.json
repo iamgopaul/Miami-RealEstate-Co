@@ -4,7 +4,8 @@
   "buildCommand": "node scripts/build.js",
   "rewrites": [
     { "source": "/submit",       "destination": "/api/submit"   },
-    { "source": "/og-image.png", "destination": "/api/og-image" }
+    { "source": "/og-image.png", "destination": "/api/og-image" },
+    { "source": "/inbound",      "destination": "/api/inbound"  }
   ],
   "functions": {
     "api/og-image.ts": {
