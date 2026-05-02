@@ -18,7 +18,7 @@ export async function sendConfirmation(lead: Lead): Promise<void> {
   await resend.emails.send({
     from:    FROM,
     to:      lead.email,
-    subject: "We received your request — Revara Realty",
+    subject: "Thank You for Reaching Out — Revara Realty",
     html:    confirmationHtml(lead),
   });
 }
@@ -38,7 +38,8 @@ export async function sendOwnerAlert(lead: Lead): Promise<void> {
 
 function confirmationHtml(lead: Lead): string {
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ");
-  const summary  = [
+  const firstName = esc(lead.name).split(" ")[0];
+  const summary = [
     lead.budget   !== "—" ? summaryRow("Budget",   lead.budget)   : "",
     lead.timeline !== "—" ? summaryRow("Timeline", lead.timeline) : "",
     location              ? summaryRow("Location", location)      : "",
@@ -49,53 +50,96 @@ function confirmationHtml(lead: Lead): string {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Revara Realty — Request Received</title>
+  <title>Thank You — Revara Realty</title>
 </head>
-<body style="margin:0;padding:0;background:#f0f2f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+<body style="margin:0;padding:0;background:#e8e8e8;font-family:Georgia,'Times New Roman',serif;">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-    <tr><td align="center" style="padding:48px 16px;">
-      <table width="100%" style="max-width:560px;" cellpadding="0" cellspacing="0" role="presentation">
+    <tr><td align="center" style="padding:48px 16px 56px;">
+      <table width="100%" style="max-width:580px;" cellpadding="0" cellspacing="0" role="presentation">
 
-        <!-- Brand header -->
-        <tr><td style="background:#080e1a;border-radius:14px 14px 0 0;padding:32px 40px;text-align:center;">
-          <p style="margin:0 0 2px;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#FF6B35;">&#9650;</p>
-          <p style="margin:0;font-size:17px;font-weight:800;letter-spacing:0.13em;text-transform:uppercase;color:#ffffff;">REVARA <span style="color:#FF6B35;">REALTY</span></p>
-          <p style="margin:5px 0 0;font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.38);">Luxury Real Estate</p>
+        <!-- ── HEADER ── -->
+        <tr><td style="background:#000000;border-radius:16px 16px 0 0;padding:44px 48px 36px;text-align:center;">
+          <img src="https://revararealty.com/media/logo/revara-realty-tab-logo.png"
+               alt="Revara Realty" width="90" height="90"
+               style="display:block;margin:0 auto 20px;border-radius:14px;"/>
+          <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:22px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#ffffff;">
+            REVARA <span style="color:#C0C0C0;">REALTY</span>
+          </p>
+          <p style="margin:8px 0 0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.40);">
+            Luxury Real Estate
+          </p>
         </td></tr>
-        <tr><td style="background:#FF6B35;height:3px;"></td></tr>
 
-        <!-- Body -->
-        <tr><td style="background:#ffffff;padding:40px 40px 32px;">
-          <h1 style="margin:0 0 12px;font-size:26px;font-weight:800;color:#080e1a;letter-spacing:-0.02em;line-height:1.2;">
-            We'll be in touch shortly.
+        <!-- Silver accent bar -->
+        <tr><td style="height:3px;background:linear-gradient(90deg,#888,#C0C0C0,#888);"></td></tr>
+
+        <!-- ── LETTER BODY ── -->
+        <tr><td style="background:#ffffff;padding:48px 52px 40px;">
+
+          <p style="margin:0 0 32px;font-size:13px;color:#999999;letter-spacing:0.06em;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+            ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          </p>
+
+          <h1 style="margin:0 0 24px;font-size:28px;font-weight:400;color:#0a0a0a;line-height:1.3;font-family:Georgia,'Times New Roman',serif;">
+            Dear ${firstName},
           </h1>
-          <p style="margin:0 0 28px;font-size:15px;color:#6b7280;line-height:1.75;">
-            Hi <strong style="color:#080e1a;">${esc(lead.name)}</strong>, thank you for reaching out to Revara Realty.
-            One of our advisors will contact you within <strong style="color:#080e1a;">24&nbsp;hours</strong>
-            with a curated selection of properties matched to your goals.
+
+          <p style="margin:0 0 20px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            On behalf of everyone at <strong style="font-weight:600;">Revara Realty</strong>, thank you sincerely for reaching out to us. We are truly honored by your interest and look forward to helping you find your ideal property in South Florida.
+          </p>
+
+          <p style="margin:0 0 20px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            Your inquiry has been received and a dedicated member of our team will personally reach out to you within <strong style="font-weight:600;">24 hours</strong> to discuss your vision in detail, answer any questions you may have, and present an exclusive, curated selection of properties tailored precisely to your goals.
+          </p>
+
+          <p style="margin:0 0 36px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            In the meantime, please do not hesitate to reply directly to this email with any additional preferences or details that may assist us in serving you better. We are committed to providing you with a seamless, world-class real estate experience from our very first conversation.
           </p>
 
           ${summary ? `
           <!-- Inquiry summary -->
           <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
-                 style="background:#f8f9fb;border:1px solid #e5e7eb;border-radius:10px;margin-bottom:28px;">
-            <tr><td style="padding:22px 24px;">
-              <p style="margin:0 0 16px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9ca3af;">Your Inquiry</p>
+                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:36px;">
+            <tr><td style="padding:20px 24px;">
+              <p style="margin:0 0 14px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                Your Inquiry Summary
+              </p>
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">${summary}</table>
             </td></tr>
           </table>` : ""}
 
-          <p style="margin:0;font-size:14px;color:#9ca3af;line-height:1.7;">
-            Questions? Simply reply to this email and we'll respond promptly.
+          <p style="margin:0 0 8px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            We look forward to speaking with you very soon.
           </p>
+
+          <p style="margin:0 0 4px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            Warmly,
+          </p>
+
+          <!-- Signature -->
+          <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:24px;">
+            <tr>
+              <td style="border-left:2px solid #C0C0C0;padding-left:16px;">
+                <p style="margin:0 0 2px;font-size:15px;font-weight:700;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:0.04em;">
+                  The Revara Realty Team
+                </p>
+                <p style="margin:0;font-size:12px;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:0.06em;text-transform:uppercase;">
+                  South Florida Luxury Real Estate
+                </p>
+              </td>
+            </tr>
+          </table>
+
         </td></tr>
 
-        <!-- Footer -->
-        <tr><td style="background:#f8f9fb;border-radius:0 0 14px 14px;padding:20px 40px;text-align:center;border-top:1px solid #e5e7eb;">
-          <p style="margin:0 0 5px;font-size:12px;color:#9ca3af;letter-spacing:0.06em;">
+        <!-- ── FOOTER ── -->
+        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:28px 48px;text-align:center;">
+          <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
             Miami &nbsp;&middot;&nbsp; Fort Lauderdale &nbsp;&middot;&nbsp; Boca Raton &nbsp;&middot;&nbsp; West Palm Beach
           </p>
-          <p style="margin:0;font-size:11px;color:#d1d5db;">&copy; 2025 Revara Realty. All rights reserved.</p>
+          <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.20);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+            &copy; 2025 Revara Realty. All rights reserved.
+          </p>
         </td></tr>
 
       </table>
@@ -156,9 +200,9 @@ function ownerHtml(lead: Lead): string {
 
 function summaryRow(label: string, value: string): string {
   return `<tr>
-    <td style="padding:4px 0;">
-      <span style="font-size:13px;color:#9ca3af;">${label}&nbsp;&nbsp;</span>
-      <span style="font-size:13px;color:#374151;">${esc(value)}</span>
+    <td style="padding:6px 0;border-bottom:1px solid #eeeeee;">
+      <span style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#aaaaaa;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">${label}&nbsp;&nbsp;</span>
+      <span style="font-size:14px;color:#1a1a1a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">${esc(value)}</span>
     </td>
   </tr>`;
 }
