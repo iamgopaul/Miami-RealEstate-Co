@@ -152,7 +152,7 @@ function confirmationHtml(lead: Lead): string {
 function ownerHtml(lead: Lead): string {
   const time = new Date(lead.timestamp).toLocaleString("en-US", {
     timeZone:  "America/New_York",
-    dateStyle: "medium",
+    dateStyle: "long",
     timeStyle: "short",
   });
 
@@ -161,32 +161,57 @@ function ownerHtml(lead: Lead): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#f0f2f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+<body style="margin:0;padding:0;background:#e8e8e8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-    <tr><td align="center" style="padding:40px 16px;">
-      <table width="100%" style="max-width:500px;" cellpadding="0" cellspacing="0" role="presentation">
+    <tr><td align="center" style="padding:48px 16px 56px;">
+      <table width="100%" style="max-width:580px;" cellpadding="0" cellspacing="0" role="presentation">
 
-        <!-- Header -->
-        <tr><td style="background:#FF6B35;border-radius:12px 12px 0 0;padding:22px 32px;">
-          <p style="margin:0;font-size:18px;font-weight:700;color:#ffffff;">New Lead — Revara Realty</p>
-          <p style="margin:5px 0 0;font-size:13px;color:rgba(255,255,255,0.78);">${esc(time)} EST</p>
+        <!-- ── HEADER ── -->
+        <tr><td style="background:#000000;border-radius:16px 16px 0 0;padding:36px 48px 28px;text-align:center;">
+          <img src="https://revararealty.com/media/logo/revara-realty-tab-logo.png"
+               alt="Revara Realty" width="80" height="80"
+               style="display:block;margin:0 auto 16px;border-radius:12px;"/>
+          <p style="margin:0;font-size:20px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#ffffff;">
+            REVARA <span style="color:#C0C0C0;">REALTY</span>
+          </p>
+          <p style="margin:6px 0 0;font-size:10px;font-weight:600;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.38);">
+            New Inquiry Received
+          </p>
         </td></tr>
 
-        <!-- Data rows -->
-        <tr><td style="background:#ffffff;padding:28px 32px 20px;">
+        <!-- Silver accent bar -->
+        <tr><td style="height:3px;background:linear-gradient(90deg,#888,#C0C0C0,#888);"></td></tr>
+
+        <!-- ── LEAD DETAILS ── -->
+        <tr><td style="background:#ffffff;padding:36px 48px 28px;">
+
+          <p style="margin:0 0 24px;font-size:12px;color:#999999;letter-spacing:0.06em;text-transform:uppercase;">
+            Received · ${esc(time)} EST
+          </p>
+
           <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-            ${dataRow("Name",     lead.name)}
-            ${dataRow("Email",    lead.email,    `mailto:${lead.email}`)}
-            ${dataRow("Phone",    lead.phone,    `tel:${lead.phone}`)}
-            ${dataRow("Location", location)}
-            ${dataRow("Budget",   lead.budget)}
-            ${dataRow("Timeline", lead.timeline)}
+            ${dataRow("Full Name",       lead.name)}
+            ${dataRow("Email Address",   lead.email,  `mailto:${lead.email}`)}
+            ${dataRow("Phone Number",    lead.phone,  `tel:${lead.phone}`)}
+            ${dataRow("Location",        location)}
+            ${dataRow("Budget Range",    lead.budget)}
+            ${dataRow("Purchase Timeline", lead.timeline)}
           </table>
+
         </td></tr>
 
-        <!-- Meta -->
-        <tr><td style="background:#fff7ed;border:1px solid #fed7aa;border-top:none;border-radius:0 0 12px 12px;padding:14px 32px;">
-          <p style="margin:0;font-size:12px;color:#92400e;line-height:1.6;">Source: ${esc(lead.source)}</p>
+        <!-- ── SOURCE TAG ── -->
+        <tr><td style="background:#f4f4f4;border-top:1px solid #e0e0e0;padding:16px 48px;text-align:center;">
+          <p style="margin:0;font-size:11px;color:#aaaaaa;letter-spacing:0.08em;text-transform:uppercase;">
+            Source: ${esc(lead.source)} &nbsp;&middot;&nbsp; revararealty.com
+          </p>
+        </td></tr>
+
+        <!-- ── FOOTER ── -->
+        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:22px 48px;text-align:center;">
+          <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.30);">
+            Miami &nbsp;&middot;&nbsp; Fort Lauderdale &nbsp;&middot;&nbsp; Boca Raton &nbsp;&middot;&nbsp; West Palm Beach
+          </p>
         </td></tr>
 
       </table>
@@ -209,11 +234,12 @@ function summaryRow(label: string, value: string): string {
 
 function dataRow(label: string, value: string, href?: string): string {
   const val = href
-    ? `<a href="${href}" style="color:#0077B6;text-decoration:none;font-size:15px;">${esc(value)}</a>`
-    : `<strong style="color:#111827;font-size:15px;">${esc(value)}</strong>`;
+    ? `<a href="${href}" style="color:#1a1a1a;text-decoration:none;font-size:16px;font-weight:600;">${esc(value)}</a>`
+    : `<span style="color:#1a1a1a;font-size:16px;font-weight:600;">${esc(value)}</span>`;
   return `<tr>
-    <td style="padding:11px 0;border-bottom:1px solid #f3f4f6;vertical-align:top;">
-      <span style="font-size:11px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.07em;">${label}</span><br>${val}
+    <td style="padding:12px 0;border-bottom:1px solid #f0f0f0;vertical-align:top;">
+      <span style="display:block;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#aaaaaa;margin-bottom:3px;">${label}</span>
+      ${val}
     </td>
   </tr>`;
 }

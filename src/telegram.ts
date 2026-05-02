@@ -16,15 +16,18 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
   const location = [lead.city, lead.zip].filter(v => v && v !== "—").join(", ") || "—";
 
   const text = [
-    `<b>New Lead — Revara Realty</b>`,
+    `<b>— REVARA REALTY —</b>`,
+    `<i>South Florida Luxury Real Estate</i>`,
     ``,
-    `<b>Name:</b> ${esc(lead.name)}`,
-    `<b>Email:</b> <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`,
-    `<b>Phone:</b> <a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>`,
-    `<b>Location:</b> ${esc(location)}`,
-    `<b>Budget:</b> ${esc(lead.budget)}`,
-    `<b>Timeline:</b> ${esc(lead.timeline)}`,
-    ``,
+    `<b>New Inquiry Received</b>`,
+    `<code>─────────────────────</code>`,
+    `<b>Name</b>       ${esc(lead.name)}`,
+    `<b>Email</b>      <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`,
+    `<b>Phone</b>      <a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>`,
+    `<b>Location</b>   ${esc(location)}`,
+    `<b>Budget</b>     ${esc(lead.budget)}`,
+    `<b>Timeline</b>   ${esc(lead.timeline)}`,
+    `<code>─────────────────────</code>`,
     `<i>${esc(time)} EST</i>`,
   ].join("\n");
 
