@@ -31,15 +31,20 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     console.error("Sheet error:", err);
   }
 
+  const labels = ["confirmation email", "owner alert", "telegram"];
   const results = await Promise.allSettled([
     sendConfirmation(lead),
     sendOwnerAlert(lead),
     sendTelegramAlert(lead),
   ]);
+  const errors: string[] = [];
   results.forEach((r, i) => {
-    const label = ["confirmation email", "owner alert", "telegram"][i];
-    if (r.status === "rejected") console.error(`${label} failed:`, r.reason);
+    if (r.status === "rejected") {
+      const msg = r.reason instanceof Error ? r.reason.message : String(r.reason);
+      console.error(`${labels[i]} failed:`, msg);
+      errors.push(`${labels[i]}: ${msg}`);
+    }
   });
 
-  return res.json({ ok: true });
+  return res.json({ ok: true, errors: errors.length ? errors : undefined });
 }
