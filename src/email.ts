@@ -107,7 +107,7 @@ function confirmationHtml(lead: Lead): string {
               <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
                 Your Revara Realty ID (RRID)
               </p>
-              <p style="margin:0 0 10px;font-size:20px;font-weight:700;letter-spacing:0.10em;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              <p style="margin:0 0 10px;font-size:16px;font-weight:700;letter-spacing:0.03em;color:#0a0a0a;white-space:nowrap;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
                 ${esc(lead.id)}
               </p>
               <p style="margin:0;font-size:12px;color:#777777;line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
