@@ -93,7 +93,7 @@ function confirmationHtml(lead: Lead): string {
           </p>
 
           <p style="margin:0 0 36px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
-            In the meantime, please do not hesitate to reply directly to this email with any additional preferences or details that may assist us in serving you better. We are committed to providing you with a seamless, world-class real estate experience from our very first conversation.
+            In the meantime, should you have any additional preferences or details you would like to share, please do not hesitate to reach out to us directly at <a href="mailto:revara.realty@outlook.com" style="color:#2c2c2c;font-weight:600;">revara.realty@outlook.com</a>. We are committed to providing you with a seamless, world-class real estate experience from our very first conversation.
           </p>
 
           ${summary ? `
