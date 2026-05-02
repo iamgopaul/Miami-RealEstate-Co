@@ -133,13 +133,20 @@ function confirmationHtml(lead: Lead): string {
         </td></tr>
 
         <!-- ── FOOTER ── -->
-        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:28px 48px;text-align:center;">
-          <p style="margin:0 0 8px;font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-            Miami &nbsp;&middot;&nbsp; Fort Lauderdale &nbsp;&middot;&nbsp; Boca Raton &nbsp;&middot;&nbsp; West Palm Beach
-          </p>
-          <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.20);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-            &copy; 2025 Revara Realty. All rights reserved.
-          </p>
+        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:0;text-align:center;overflow:hidden;">
+          <img src="https://revararealty.com/og-image.png" alt="Revara Realty" width="580"
+               style="display:block;width:100%;max-width:580px;border:0;"/>
+          <div style="padding:24px 40px 28px;">
+            <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.70);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              Miami, Florida 33172
+            </p>
+            <p style="margin:0 0 16px;font-size:12px;color:rgba(255,255,255,0.45);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              <a href="mailto:revara.realty@outlook.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">revara.realty@outlook.com</a>
+            </p>
+            <p style="margin:0;font-size:11px;color:rgba(255,255,255,0.22);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              &copy; 2025 Revara Realty. All rights reserved.
+            </p>
+          </div>
         </td></tr>
 
       </table>
@@ -208,10 +215,17 @@ function ownerHtml(lead: Lead): string {
         </td></tr>
 
         <!-- ── FOOTER ── -->
-        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:22px 48px;text-align:center;">
-          <p style="margin:0;font-size:11px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.30);">
-            Miami &nbsp;&middot;&nbsp; Fort Lauderdale &nbsp;&middot;&nbsp; Boca Raton &nbsp;&middot;&nbsp; West Palm Beach
-          </p>
+        <tr><td style="background:#0a0a0a;border-radius:0 0 16px 16px;padding:0;text-align:center;overflow:hidden;">
+          <img src="https://revararealty.com/og-image.png" alt="Revara Realty" width="580"
+               style="display:block;width:100%;max-width:580px;border:0;"/>
+          <div style="padding:20px 40px 24px;">
+            <p style="margin:0 0 4px;font-size:12px;font-weight:600;color:rgba(255,255,255,0.70);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              Miami, Florida 33172
+            </p>
+            <p style="margin:0;font-size:12px;color:rgba(255,255,255,0.45);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+              <a href="mailto:revara.realty@outlook.com" style="color:rgba(255,255,255,0.45);text-decoration:none;">revara.realty@outlook.com</a>
+            </p>
+          </div>
         </td></tr>
 
       </table>
