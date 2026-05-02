@@ -7,9 +7,8 @@ function client(): Resend | null {
   return key ? new Resend(key) : null;
 }
 
-const FROM     = process.env.RESEND_FROM   ?? "Revara Realty · No Reply <team@revararealty.com>";
-const OWNER    = process.env.OWNER_EMAIL   ?? "revara.realty@outlook.com";
-const REPLY_TO = process.env.REPLY_TO      ?? "revara.realty@outlook.com";
+const FROM  = process.env.RESEND_FROM  ?? "Revara Realty · No Reply <team@revararealty.com>";
+const OWNER = process.env.OWNER_EMAIL  ?? "revara.realty@outlook.com";
 
 // ── Public API ────────────────────────────────────────────────────────────────
 
@@ -17,11 +16,10 @@ export async function sendConfirmation(lead: Lead): Promise<void> {
   const resend = client();
   if (!resend) { console.warn("RESEND_API_KEY not set — skipping confirmation email"); return; }
   await resend.emails.send({
-    from:     FROM,
-    to:       lead.email,
-    replyTo:  REPLY_TO,
-    subject:  "Thank You for Reaching Out — Revara Realty",
-    html:     confirmationHtml(lead),
+    from:    FROM,
+    to:      lead.email,
+    subject: "Thank You for Reaching Out — Revara Realty",
+    html:    confirmationHtml(lead),
   });
 }
 
@@ -31,7 +29,6 @@ export async function sendOwnerAlert(lead: Lead): Promise<void> {
   await resend.emails.send({
     from:    FROM,
     to:      OWNER,
-    replyTo: lead.email,
     subject: `New Lead: ${lead.name} · ${lead.budget} · ${lead.timeline}`,
     html:    ownerHtml(lead),
   });
@@ -135,8 +132,8 @@ function confirmationHtml(lead: Lead): string {
 
           <!-- Do not reply notice -->
           <p style="margin:36px 0 0;font-size:11px;color:#bbbbbb;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;border-top:1px solid #eeeeee;padding-top:20px;">
-            This is an automated message — please do not reply directly to this email.<br>
-            To reach us, contact <a href="mailto:revara.realty@outlook.com" style="color:#888888;">revara.realty@outlook.com</a>.
+            This is an automated message — please do not reply to this email as it is not monitored.<br>
+            To reach our team directly, please email us at <a href="mailto:revara.realty@outlook.com" style="color:#888888;">revara.realty@outlook.com</a>.
           </p>
 
         </td></tr>
