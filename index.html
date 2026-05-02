@@ -109,7 +109,7 @@
     }
 
     .site-logo-img {
-      height: 180px;
+      height: clamp(80px, 15vw, 180px);
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
@@ -542,12 +542,56 @@
     /* ── STICKY CTA (mobile only) ── */
     .sticky-cta { display: none; }
 
+    /* ── MOBILE LAYOUT ── */
     @media (max-width: 767px) {
+      /* Logo */
+      .site-logo         { margin-bottom: 16px; gap: 8px; }
+      .site-logo-img     { height: 80px; }
+      .site-logo-name    { font-size: clamp(18px, 5.5vw, 24px); }
+      .site-logo-tagline { font-size: 8px; }
+
+      /* Hero */
+      .hero        { padding: 28px 16px calc(60px + env(safe-area-inset-bottom)); }
+      .hero-inner  { gap: 20px; }
+      .hero h1     { margin-bottom: 10px; }
+      .hero .sub   { margin-bottom: 0; font-size: 15px; }
+
+      /* Badge */
+      .badge { margin-bottom: 14px; }
+
+      /* Form card — full width, comfortable padding */
+      .form-card   { width: 100%; border-radius: 14px; }
+      .field       { margin-bottom: 10px; }
+      .field input,
+      .field select { padding: 12px 13px; }
+
+      /* Dropdown list: cap height so it doesn't overflow viewport */
+      .cd-list { max-height: 180px; }
+
+      /* Benefits */
+      .benefits       { padding: 40px 16px; }
+      .benefits h2    { margin-bottom: 28px; }
+      .benefit-card   { padding: 24px 18px; }
+
+      /* Final CTA */
+      .final-cta      { padding: 40px 16px; }
+      .final-cta .sub { font-size: 15px; }
+
+      /* Trust bar */
+      .trust-bar { padding: 14px 16px; line-height: 1.6; }
+
+      /* Footer */
+      footer { padding: 18px 16px; font-size: 12px; }
+
+      /* Prevent any element from bleeding outside the viewport */
+      * { max-width: 100%; }
+      img, video, canvas { height: auto; }
+
+      /* Sticky CTA */
       .sticky-cta {
         display: block;
         position: fixed;
         bottom: 0; left: 0; right: 0;
-        /* env() gives correct inset on iPhone X+ / Android w/ gesture nav */
         padding: 10px 16px calc(14px + env(safe-area-inset-bottom));
         background: var(--surface-hi);
         border-top: 1px solid var(--border);
@@ -561,7 +605,6 @@
         background: var(--orange);
         color: #000;
         border: none;
-        /* 48px touch target (Apple HIG / Material minimum) */
         padding: 15px;
         min-height: 48px;
         border-radius: var(--radius);
@@ -571,6 +614,14 @@
       }
 
       body { padding-bottom: calc(76px + env(safe-area-inset-bottom)); }
+    }
+
+    /* Very small phones (iPhone SE, Galaxy A series) */
+    @media (max-width: 375px) {
+      .site-logo-img  { height: 64px; }
+      .hero           { padding: 24px 14px calc(60px + env(safe-area-inset-bottom)); }
+      .form-card      { padding: 14px 12px; }
+      .field-row      { grid-template-columns: 1fr; }
     }
 
     /* ── FOOTER ── */
