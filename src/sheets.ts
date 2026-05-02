@@ -1,6 +1,7 @@
 import { google } from "googleapis";
 
 export interface Lead {
+  id:        string;
   name:      string;
   email:     string;
   phone:     string;
@@ -12,7 +13,7 @@ export interface Lead {
   source:    string;
 }
 
-const HEADERS    = ["Timestamp", "Name", "Email", "Phone", "City", "Zip", "Budget", "Timeline", "Source"];
+const HEADERS    = ["ID", "Timestamp", "Name", "Email", "Phone", "City", "Zip", "Budget", "Timeline", "Source"];
 const SHEET_NAME = process.env.GOOGLE_SHEET_NAME ?? "Leads";
 
 const PLACEHOLDER = (v: string) =>
@@ -42,7 +43,7 @@ export async function appendLead(lead: Lead): Promise<void> {
   }
 
   const row = [
-    lead.timestamp, lead.name, lead.email, lead.phone,
+    lead.id, lead.timestamp, lead.name, lead.email, lead.phone,
     lead.city, lead.zip, lead.budget, lead.timeline, lead.source,
   ];
 

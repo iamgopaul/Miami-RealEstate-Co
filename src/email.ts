@@ -29,7 +29,7 @@ export async function sendOwnerAlert(lead: Lead): Promise<void> {
   await resend.emails.send({
     from:    FROM,
     to:      OWNER,
-    subject: `New Lead: ${lead.name} · ${lead.budget} · ${lead.timeline}`,
+    subject: `New Lead [${lead.id}]: ${lead.name} · ${lead.budget} · ${lead.timeline}`,
     html:    ownerHtml(lead),
   });
 }
@@ -96,6 +96,22 @@ function confirmationHtml(lead: Lead): string {
             In the meantime, should you have any additional preferences or details you would like to share, please do not hesitate to reach out to us directly at <a href="mailto:revara.realty@outlook.com" style="color:#2c2c2c;font-weight:600;">revara.realty@outlook.com</a>. We are committed to providing you with a seamless, world-class real estate experience from our very first conversation.
           </p>
 
+          <!-- Reference ID -->
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
+                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:36px;">
+            <tr><td style="padding:16px 24px;">
+              <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                Revara Realty ID (RRID)
+              </p>
+              <p style="margin:0;font-size:18px;font-weight:700;letter-spacing:0.10em;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                ${esc(lead.id)}
+              </p>
+              <p style="margin:8px 0 0;font-size:12px;color:#888888;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                When emailing us, use the subject line: <strong style="color:#555555;">${esc(lead.name)} – ${esc(lead.id)}</strong> so our team can immediately locate your inquiry.
+              </p>
+            </td></tr>
+          </table>
+
           ${summary ? `
           <!-- Inquiry summary -->
           <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
@@ -133,7 +149,7 @@ function confirmationHtml(lead: Lead): string {
           <!-- Do not reply notice -->
           <p style="margin:36px 0 0;font-size:11px;color:#bbbbbb;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;border-top:1px solid #eeeeee;padding-top:20px;">
             This is an automated message — please do not reply to this email as it is not monitored.<br>
-            To reach our team directly, please email us at <a href="mailto:revara.realty@outlook.com" style="color:#888888;">revara.realty@outlook.com</a>.
+            To reach our team directly, email <a href="mailto:revara.realty@outlook.com" style="color:#888888;">revara.realty@outlook.com</a> with the subject: <strong style="color:#aaaaaa;">${esc(lead.name)} – ${esc(lead.id)}</strong>.
           </p>
 
         </td></tr>
@@ -203,6 +219,7 @@ function ownerHtml(lead: Lead): string {
           </p>
 
           <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+            ${dataRow("RRID",            lead.id)}
             ${dataRow("Full Name",       lead.name)}
             ${dataRow("Email Address",   lead.email,  `mailto:${lead.email}`)}
             ${dataRow("Phone Number",    lead.phone,  `tel:${lead.phone}`)}

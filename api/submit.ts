@@ -2,6 +2,7 @@ import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { appendLead, type Lead } from "../src/sheets.js";
 import { sendConfirmation, sendOwnerAlert } from "../src/email.js";
 import { sendTelegramAlert } from "../src/telegram.js";
+import { generateLeadId } from "../src/utils.js";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") return res.status(405).json({ ok: false });
@@ -16,6 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const lead: Lead = {
+    id:        generateLeadId(),
     name, email, phone,
     city:      body.city?.trim()  || "—",
     zip:       body.zip?.trim()   || "—",

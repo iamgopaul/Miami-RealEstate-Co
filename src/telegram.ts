@@ -21,6 +21,7 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
     ``,
     `<b>New Inquiry Received</b>`,
     `<code>─────────────────────</code>`,
+    `<b>RRID</b>       <code>${esc(lead.id)}</code>`,
     `<b>Name</b>       ${esc(lead.name)}`,
     `<b>Email</b>      <a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a>`,
     `<b>Phone</b>      <a href="tel:${esc(lead.phone)}">${esc(lead.phone)}</a>`,
