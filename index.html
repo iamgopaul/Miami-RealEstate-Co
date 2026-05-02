@@ -1141,6 +1141,12 @@
               </div>
             </div>
 
+            <!-- Honeypot: hidden from humans, bots fill it in -->
+            <input type="text" name="website" id="website" autocomplete="off"
+                   tabindex="-1" aria-hidden="true"
+                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+            <input type="hidden" id="form-ts" name="form_ts">
+
             <button type="submit" class="btn-submit" id="submit-btn">
               Get Listings Now
             </button>
@@ -1222,6 +1228,15 @@
   </footer>
 
   <script>
+    // Record first human interaction with the form — used to detect bot submissions
+    let formInteracted = false;
+    document.getElementById('lead-form').addEventListener('focusin', () => {
+      if (!formInteracted) {
+        document.getElementById('form-ts').value = Date.now();
+        formInteracted = true;
+      }
+    }, { once: false });
+
     const form      = document.getElementById('lead-form');
     const submitBtn = document.getElementById('submit-btn');
     const formWrap  = document.getElementById('form-wrap');
@@ -1277,6 +1292,13 @@
         showFieldErrors(errors);
         return;
       }
+
+      // Honeypot check — bots fill this, humans never see it
+      if (document.getElementById('website').value) return;
+
+      // Time check — reject if submitted under 1 second after first interaction (bot behaviour)
+      const ts = parseInt(document.getElementById('form-ts').value || '0', 10);
+      if (ts && Date.now() - ts < 1000) return;
 
       submitBtn.textContent = 'Sending…';
       submitBtn.disabled    = true;
