@@ -33,7 +33,7 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
 
   const chatIds = chatId.split(",").map(id => id.trim()).filter(Boolean);
 
-  await Promise.all(chatIds.map(async id => {
+  const results = await Promise.allSettled(chatIds.map(async id => {
     const res = await fetch(
       `https://api.telegram.org/bot${token}/sendMessage`,
       {
@@ -47,5 +47,13 @@ export async function sendTelegramAlert(lead: Lead): Promise<void> {
       throw new Error(`Telegram error ${res.status} for chat ${id}: ${body}`);
     }
   }));
+
+  const failed = results.filter(r => r.status === "rejected");
+  if (failed.length === results.length) {
+    throw new Error(failed.map(r => (r as PromiseRejectedResult).reason?.message ?? r).join("; "));
+  }
+  for (const r of failed) {
+    console.error("Telegram partial failure:", (r as PromiseRejectedResult).reason?.message);
+  }
 }
 
