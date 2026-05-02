@@ -19,7 +19,7 @@ function ensureAssets() {
   if (heroDataUri && logoDataUri && fontData) return;
   const hero = readFileSync(join(process.cwd(), "media/page-wallpapers/hero.jpg"));
   heroDataUri = `data:image/jpeg;base64,${hero.toString("base64")}`;
-  const logo = readFileSync(join(process.cwd(), "media/logo/revara-realty-logo.png"));
+  const logo = readFileSync(join(process.cwd(), "media/logo/revara-realty-tab-logo.png"));
   logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
   fontData = new Uint8Array(readFileSync(join(process.cwd(), "fonts/Inter-Bold.ttf")));
 }
@@ -36,14 +36,6 @@ function buildSvg(heroUri: string, logoUri: string): string {
       <stop offset="55%"  stop-color="#000000" stop-opacity="0"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0.65"/>
     </linearGradient>
-    <filter id="logoEnhance" color-interpolation-filters="sRGB">
-      <feComponentTransfer>
-        <feFuncR type="linear" slope="1.4" intercept="0"/>
-        <feFuncG type="linear" slope="1.4" intercept="0"/>
-        <feFuncB type="linear" slope="1.4" intercept="0"/>
-        <feFuncA type="linear" slope="1"   intercept="0"/>
-      </feComponentTransfer>
-    </filter>
   </defs>
 
   <image href="${heroUri}" x="0" y="0" width="1200" height="630" preserveAspectRatio="xMidYMid slice"/>
@@ -52,7 +44,7 @@ function buildSvg(heroUri: string, logoUri: string): string {
   <rect x="0" y="0" width="1200" height="5" fill="#C0C0C0"/>
 
   <image href="${logoUri}" x="370" y="28" width="460" height="460"
-         preserveAspectRatio="xMidYMid meet" filter="url(#logoEnhance)"/>
+         preserveAspectRatio="xMidYMid meet"/>
 
   <rect x="500" y="505" width="200" height="2" fill="#C0C0C0" opacity="0.40"/>
 
