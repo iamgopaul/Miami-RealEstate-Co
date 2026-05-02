@@ -80,52 +80,45 @@ function confirmationHtml(lead: Lead): string {
             ${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
           </p>
 
-          <h1 style="margin:0 0 24px;font-size:28px;font-weight:400;color:#0a0a0a;line-height:1.3;font-family:Georgia,'Times New Roman',serif;">
+          <h1 style="margin:0 0 28px;font-size:28px;font-weight:400;color:#0a0a0a;line-height:1.3;font-family:Georgia,'Times New Roman',serif;">
             Dear ${firstName},
           </h1>
 
-          <p style="margin:0 0 20px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
-            On behalf of everyone at <strong style="font-weight:600;">Revara Realty</strong>, thank you sincerely for reaching out to us. We are truly honored by your interest and look forward to helping you find your ideal property in South Florida.
+          <p style="margin:0 0 36px;font-size:16px;color:#2c2c2c;line-height:1.9;font-family:Georgia,'Times New Roman',serif;">
+            Thank you for reaching out to <strong style="font-weight:600;">Revara Realty</strong>. Your inquiry has been received, and a dedicated member of our team will personally connect with you within <strong style="font-weight:600;">24 hours</strong> to discuss your vision and present an exclusive, curated selection of South Florida properties matched to your criteria.
           </p>
-
-          <p style="margin:0 0 20px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
-            Your inquiry has been received and a dedicated member of our team will personally reach out to you within <strong style="font-weight:600;">24 hours</strong> to discuss your vision in detail, answer any questions you may have, and present an exclusive, curated selection of properties tailored precisely to your goals.
-          </p>
-
-          <p style="margin:0 0 36px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
-            In the meantime, should you have any additional preferences or details you would like to share, please do not hesitate to reach out to us directly at <a href="mailto:revara.realty@outlook.com" style="color:#2c2c2c;font-weight:600;">revara.realty@outlook.com</a>. We are committed to providing you with a seamless, world-class real estate experience from our very first conversation.
-          </p>
-
-          <!-- Reference ID -->
-          <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
-                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:36px;">
-            <tr><td style="padding:16px 24px;">
-              <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                Revara Realty ID (RRID)
-              </p>
-              <p style="margin:0;font-size:18px;font-weight:700;letter-spacing:0.10em;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                ${esc(lead.id)}
-              </p>
-              <p style="margin:8px 0 0;font-size:12px;color:#888888;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                When emailing us, use the subject line: <strong style="color:#555555;">${esc(lead.name)} – ${esc(lead.id)}</strong> so our team can immediately locate your inquiry.
-              </p>
-            </td></tr>
-          </table>
 
           ${summary ? `
           <!-- Inquiry summary -->
           <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
-                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:36px;">
+                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:28px;">
             <tr><td style="padding:20px 24px;">
               <p style="margin:0 0 14px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-                Your Inquiry Summary
+                Inquiry Summary
               </p>
               <table width="100%" cellpadding="0" cellspacing="0" role="presentation">${summary}</table>
             </td></tr>
           </table>` : ""}
 
-          <p style="margin:0 0 8px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
-            We look forward to speaking with you very soon.
+          <!-- Reference ID -->
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
+                 style="background:#f7f7f7;border-left:3px solid #C0C0C0;border-radius:0 8px 8px 0;margin-bottom:36px;">
+            <tr><td style="padding:18px 24px;">
+              <p style="margin:0 0 6px;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#888888;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                Your Revara Realty ID (RRID)
+              </p>
+              <p style="margin:0 0 10px;font-size:20px;font-weight:700;letter-spacing:0.10em;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                ${esc(lead.id)}
+              </p>
+              <p style="margin:0;font-size:12px;color:#777777;line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                This is your unique reference number. When contacting us, please use the subject line:<br>
+                <strong style="color:#444444;">${esc(lead.name)} | ${esc(lead.id)}</strong>
+              </p>
+            </td></tr>
+          </table>
+
+          <p style="margin:0 0 6px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
+            We look forward to speaking with you.
           </p>
 
           <p style="margin:0 0 4px;font-size:16px;color:#2c2c2c;line-height:1.85;font-family:Georgia,'Times New Roman',serif;">
@@ -133,7 +126,7 @@ function confirmationHtml(lead: Lead): string {
           </p>
 
           <!-- Signature -->
-          <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:24px;">
+          <table cellpadding="0" cellspacing="0" role="presentation" style="margin-top:24px;margin-bottom:36px;">
             <tr>
               <td style="border-left:2px solid #C0C0C0;padding-left:16px;">
                 <p style="margin:0 0 2px;font-size:15px;font-weight:700;color:#0a0a0a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;letter-spacing:0.04em;">
@@ -146,10 +139,19 @@ function confirmationHtml(lead: Lead): string {
             </tr>
           </table>
 
+          <!-- Official email notice -->
+          <table width="100%" cellpadding="0" cellspacing="0" role="presentation"
+                 style="background:#fffdf0;border:1px solid #e8e0b0;border-radius:8px;margin-bottom:20px;">
+            <tr><td style="padding:14px 20px;">
+              <p style="margin:0;font-size:12px;color:#6b5f00;line-height:1.65;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+                <strong style="color:#4a4000;">Please note:</strong> <a href="mailto:revara.realty@outlook.com" style="color:#6b5f00;font-weight:600;">revara.realty@outlook.com</a> is our official and only email address. We will never contact you from any other address.
+              </p>
+            </td></tr>
+          </table>
+
           <!-- Do not reply notice -->
-          <p style="margin:36px 0 0;font-size:11px;color:#bbbbbb;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;border-top:1px solid #eeeeee;padding-top:20px;">
-            This is an automated message — please do not reply to this email as it is not monitored.<br>
-            To reach our team directly, email <a href="mailto:revara.realty@outlook.com" style="color:#888888;">revara.realty@outlook.com</a> with the subject: <strong style="color:#aaaaaa;">${esc(lead.name)} – ${esc(lead.id)}</strong>.
+          <p style="margin:0;font-size:11px;color:#bbbbbb;line-height:1.6;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;border-top:1px solid #eeeeee;padding-top:20px;">
+            This is an automated confirmation — please do not reply directly to this email.
           </p>
 
         </td></tr>
