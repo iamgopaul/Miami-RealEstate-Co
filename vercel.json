@@ -31,7 +31,8 @@
   "rewrites": [
     { "source": "/submit",       "destination": "/api/submit"   },
     { "source": "/og-image.png", "destination": "/api/og-image" },
-    { "source": "/inbound",      "destination": "/api/inbound"  }
+    { "source": "/inbound",      "destination": "/api/inbound"  },
+    { "source": "/privacy",      "destination": "/privacy.html" }
   ],
   "functions": {
     "api/og-image.ts": {
