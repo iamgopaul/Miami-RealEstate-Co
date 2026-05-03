@@ -61,7 +61,7 @@ const server = Bun.serve({
     // ── OG image ──
     if (pathname === "/og-image.png" && req.method === "GET") {
       const png = await getOgPng();
-      return new Response(png, {
+      return new Response(png as unknown as BodyInit, {
         headers: {
           "Content-Type": "image/png",
           "Cache-Control": "public, max-age=86400",
