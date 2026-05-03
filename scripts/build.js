@@ -1,9 +1,6 @@
 import { readFileSync, writeFileSync, copyFileSync } from "fs";
 
-if (process.env.COMING_SOON === "true") {
-  copyFileSync("frontend/coming-soon.html", "frontend/index.html");
-  console.log("build: coming soon mode");
-} else {
+if (process.env.LAUNCH === "true") {
   const url = (process.env.SITE_URL ?? "").replace(/\/$/, "");
   if (!url) {
     console.error("SITE_URL env var is not set — og:image and canonical URLs will be broken");
@@ -12,5 +9,8 @@ if (process.env.COMING_SOON === "true") {
   let html = readFileSync("frontend/index-main.html", "utf8");
   html = html.replaceAll("__SITE_URL__", url);
   writeFileSync("frontend/index.html", html);
-  console.log(`build: replaced __SITE_URL__ → ${url}`);
+  console.log(`build: LIVE — replaced __SITE_URL__ → ${url}`);
+} else {
+  copyFileSync("frontend/coming-soon.html", "frontend/index.html");
+  console.log("build: coming soon mode");
 }
