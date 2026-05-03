@@ -169,7 +169,7 @@
 
     /* Landscape phones: don't lock them to full screen height */
     @media (max-height: 520px) and (orientation: landscape) {
-      .hero { min-height: auto; padding: 40px clamp(16px, 5vw, 40px) 60px; }
+      .hero { min-height: 0; padding: 40px clamp(16px, 5vw, 40px) 60px; }
     }
 
     /* Cinematic bottom fade into the dark page */
@@ -806,8 +806,8 @@
       transform: translateX(-10px);
       transition: opacity 0.4s ease, transform 0.4s ease;
       pointer-events: none;
-      backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
     }
     @media (max-width: 767px) {
       .toast { bottom: calc(90px + env(safe-area-inset-bottom)); left: 16px; }
@@ -821,6 +821,10 @@
     .toast-body { display: flex; flex-direction: column; gap: 3px; }
     .toast-msg  { color: rgba(232,238,255,0.88); line-height: 1.45; }
     .toast-time { font-size: 11px; color: var(--muted); }
+
+    .svg-hidden       { display: none; }
+    .label-required   { color: #C0C0C0; }
+    .honeypot         { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
   </style>
 </head>
 <body>
@@ -831,7 +835,7 @@
     <div id="cursor-glow"></div>
 
     <!-- SVG cityscape removed — real photo background via CSS -->
-    <svg style="display:none" viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg class="svg-hidden" viewBox="0 0 1440 700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%"   stop-color="#00030a"/>
@@ -1015,19 +1019,19 @@
           <form id="lead-form" novalidate>
 
             <div class="field">
-              <label for="name">Full Name <span style="color:#C0C0C0">*</span></label>
+              <label for="name">Full Name <span class="label-required">*</span></label>
               <input type="text" id="name" name="name"
                      placeholder="Jane Smith" required autocomplete="name">
             </div>
 
             <div class="field">
-              <label for="phone">Phone Number <span style="color:#C0C0C0">*</span></label>
+              <label for="phone">Phone Number <span class="label-required">*</span></label>
               <input type="tel" id="phone" name="phone"
                      placeholder="(305) 555-0100" required autocomplete="tel">
             </div>
 
             <div class="field">
-              <label for="email">Email Address <span style="color:#C0C0C0">*</span></label>
+              <label for="email">Email Address <span class="label-required">*</span></label>
               <input type="email" id="email" name="email"
                      placeholder="jane@example.com" required autocomplete="email">
             </div>
@@ -1148,8 +1152,7 @@
 
             <!-- Honeypot: hidden from humans, bots fill it in -->
             <input type="text" name="website" id="website" autocomplete="off"
-                   tabindex="-1" aria-hidden="true"
-                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;">
+                   tabindex="-1" aria-hidden="true" class="honeypot">
             <input type="hidden" id="form-ts" name="form_ts">
 
             <button type="submit" class="btn-submit" id="submit-btn">

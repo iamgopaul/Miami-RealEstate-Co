@@ -6,7 +6,7 @@ if (!url) {
   process.exit(1);
 }
 
-let html = readFileSync("index.html", "utf8");
+let html = readFileSync("frontend/index.html", "utf8");
 html = html.replaceAll("__SITE_URL__", url);
-writeFileSync("index.html", html);
+writeFileSync("frontend/index.html", html);
 console.log(`build: replaced __SITE_URL__ → ${url}`);

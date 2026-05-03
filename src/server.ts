@@ -8,7 +8,7 @@ import { join } from "path";
 const ROOT = join(import.meta.dir, "..");
 
 // Read HTML once at startup, inject env vars so the file stays a clean template
-let htmlSrc = await Bun.file(join(ROOT, "index.html")).text();
+let htmlSrc = await Bun.file(join(ROOT, "frontend/index.html")).text();
 
 const pixelId = process.env.META_PIXEL_ID ?? "";
 if (pixelId) {
@@ -74,7 +74,7 @@ const server = Bun.serve({
       const dot = pathname.lastIndexOf(".");
       const ext = dot >= 0 ? pathname.slice(dot).toLowerCase() : "";
       if (STATIC_EXTS.has(ext)) {
-        const file = Bun.file(join(ROOT, pathname.slice(1)));
+        const file = Bun.file(join(ROOT, "frontend", pathname.slice(1)));
         if (await file.exists()) {
           return new Response(file, {
             headers: {

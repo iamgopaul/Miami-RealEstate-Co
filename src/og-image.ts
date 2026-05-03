@@ -17,9 +17,9 @@ async function ensureInit() {
 
 function ensureAssets() {
   if (heroDataUri && logoDataUri && fontData) return;
-  const hero = readFileSync(join(process.cwd(), "media/page-wallpapers/hero.jpg"));
+  const hero = readFileSync(join(process.cwd(), "frontend/media/page-wallpapers/hero.jpg"));
   heroDataUri = `data:image/jpeg;base64,${hero.toString("base64")}`;
-  const logo = readFileSync(join(process.cwd(), "media/logo/revara-realty-logo.png"));
+  const logo = readFileSync(join(process.cwd(), "frontend/media/logo/revara-realty-logo.png"));
   logoDataUri = `data:image/png;base64,${logo.toString("base64")}`;
   fontData = new Uint8Array(readFileSync(join(process.cwd(), "fonts/Inter-Bold.ttf")));
 }
