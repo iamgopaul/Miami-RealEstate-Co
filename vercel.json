@@ -29,7 +29,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/",             "destination": "/coming-soon.html" },
     { "source": "/submit",       "destination": "/api/submit"   },
     { "source": "/og-image.png", "destination": "/api/og-image" },
     { "source": "/inbound",      "destination": "/api/inbound"  },
